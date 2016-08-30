@@ -1,0 +1,42 @@
+[ 2016-08-30T20:29:36+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2048] Declaration of SettingModel::fetchAll() should be compatible with that of CommonModel::fetchAll() G:\law\trunk\Bincms\Lib\Model\SettingModel.class.php 第 9 行.
+NOTIC: [2048] Declaration of SettingModel::save() should be compatible with that of Model::save() G:\law\trunk\Bincms\Lib\Model\SettingModel.class.php 第 9 行.
+SQL: SHOW COLUMNS FROM `sk_setting` [ RunTime:0.010000s ]
+SQL: SELECT * FROM `sk_setting`  [ RunTime:0.001000s ]
+NOTIC: [8] unserialize() [<a href='function.unserialize'>function.unserialize</a>]: Error at offset 113 of 194 bytes G:\law\trunk\Bincms\Lib\Model\SettingModel.class.php 第 22 行.
+NOTIC: [8] Undefined variable: str G:\law\trunk\ThinkPHP\Extend\Library\ORG\Crypt\Base64.class.php 第 69 行.
+NOTIC: [2048] Declaration of TemplateModel::fetchAll() should be compatible with that of CommonModel::fetchAll() G:\law\trunk\Bincms\Lib\Model\TemplateModel.class.php 第 35 行.
+SQL: SHOW COLUMNS FROM `sk_template` [ RunTime:0.011000s ]
+SQL: SELECT * FROM `sk_template`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `sk_template_setting` [ RunTime:0.011001s ]
+SQL: SELECT * FROM `sk_template_setting`  [ RunTime:0.000000s ]
+NOTIC: [2] Invalid argument supplied for foreach() G:\law\trunk\Bincms\Lib\Model\CommonModel.class.php 第 35 行.
+NOTIC: [8] Undefined index: default G:\law\trunk\Bincms\Lib\Model\TemplatesettingModel.class.php 第 16 行.
+SQL: SHOW COLUMNS FROM `sk_item_cate` [ RunTime:0.010001s ]
+SQL: SELECT * FROM `sk_item_cate` WHERE ( `parent_id` = 0 )  [ RunTime:0.001000s ]
+SQL: SELECT * FROM `sk_item_cate` ORDER BY `orderby` asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `sk_keyword` [ RunTime:0.010001s ]
+SQL: SELECT * FROM `sk_keyword`  [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of SeoModel::fetchAll() should be compatible with that of CommonModel::fetchAll() G:\law\trunk\Bincms\Lib\Model\SeoModel.class.php 第 31 行.
+SQL: SHOW COLUMNS FROM `sk_seo` [ RunTime:0.010000s ]
+SQL: SELECT * FROM `sk_seo`  [ RunTime:0.001000s ]
+NOTIC: [8] Constant THEME_NAME already defined G:\law\trunk\Bincms\Lib\Action\Pchome\CommonAction.class.php 第 203 行.
+NOTIC: [8] Constant THEME_PATH already defined G:\law\trunk\ThinkPHP\Lib\Core\View.class.php 第 154 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined G:\law\trunk\ThinkPHP\Lib\Core\View.class.php 第 155 行.
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: title G:\law\trunk\Bincms\Runtime\Cache\Pchome\edeeef229c1e6d9f216b426a14f248b3.php 第 7 行.
+INFO: ParseTemplate Behavior ::run [ RunTime:0.053003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053003s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.002000s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.000000s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.000000s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004000s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
