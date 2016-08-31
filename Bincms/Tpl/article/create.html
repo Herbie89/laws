@@ -47,7 +47,8 @@
                     <td class="rgTdBt"><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="manageInput" />
 
                     </td>
-                </tr><tr>
+                </tr>
+				<tr>
                     <td class="lfTdBt">来源：</td>
                     <td class="rgTdBt"><input type="text" name="data[source]" value="<{$detail.source|default=''}>" class="manageInput" />
 
@@ -57,12 +58,14 @@
                     <td class="rgTdBt"><input type="text" name="data[keywords]" value="<{$detail.keywords|default=''}>" class="manageInput" />
                         <code>多个关键字用,逗号分隔</code>
                     </td>
-                </tr><tr>
+                </tr>
+				<tr>
                     <td class="lfTdBt">描述：</td>
                     <td class="rgTdBt"><textarea  name="data <code>简单的文章描述</code>" cols="50" rows="10" ><{$detail.desc|default=''}></textarea>
                         <code>简单的文章描述</code>
                     </td>
-                </tr><tr>
+                </tr>
+				<tr>
                     <td class="lfTdBt">
                 <js file='__PUBLIC__/js/uploadify/jquery.uploadify.min.js'/>
                 <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
@@ -87,7 +90,7 @@
                             'fileTypeExts': '*.gif;*.jpg;*.png',
                             'queueSizeLimit': 1,
                             'onUploadSuccess': function (file, data, response) {
-                                $("#data_photo").val(data);
+                               alert($("#data_photo").val(data)) ;
                                 $("#photo_img").attr('src', '__ROOT__/attachs/' + data).show();
                             }
                         });

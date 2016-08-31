@@ -2,16 +2,16 @@
 
 <div class="mainBt">
     <ul>
-        <li class="li1">商城</li>
-        <li class="li2">项目管理</li>
-        <li class="li2 li3">编辑</li>
+        <li class="li1">咨询</li>
+        <li class="li2">咨询管理</li>
+        <li class="li2 li3">咨询编辑</li>
     </ul>
 </div>
 <form target="baocms_frm" action="<{:U('item/edit',array('item_id'=>$detail['item_id']))}>" method="post">
     <div class="mainScAdd ">
         <div class="tableBox">
             <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
-                <tr>
+              <!--   <tr>
                     <td class="lfTdBt">医院：</td>
                     <td class="rgTdBt"> <div class="lt">
                             <input type="hidden" id="hospital_id" name="data[hospital_id]" value="<{$detail.hospital_id|default=''}>"/>
@@ -19,7 +19,7 @@
                         </div>
                         <a mini="select"  w="1000" h="600" href="<{:U('hospital/select')}>" class="seleSj">选择医院</a>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td class="lfTdBt">分类：</td>
                     <td class="rgTdBt"> 

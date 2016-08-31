@@ -3,26 +3,26 @@
 
 <div class="mainBt">
     <ul>
-        <li class="li1">商城</li>
-        <li class="li2">项目</li>
-        <li class="li2 li3">项目列表</li>
+        <li class="li1">法识</li>
+        <li class="li2">法识管理</li>
+        <li class="li2 li3">法识列表</li>
     </ul>
 </div>
 <div class="main-jsgl main-sc">
     <div class="jsglNr">
         <div class="selectNr" style="margin-top: 0px; border-top:none;">
             <div class="left">
-                <{:BA('lawyerkown/create','','添加项目')}>
+                <{:BA('lawyerkown/create','','添加法识')}>
             </div>
             <div class="right">
                 <form class="search_form" method="post" action="<{:U('lawyerkown/index')}>"> 
                     <div class="seleHidden" id="seleHidden">
                         <div class="seleK">
-                            <label>
+                          <!--   <label>
                                 <input type="hidden" id="hospital_id" name="hospital_id" value="<{$hospital_id|default=''}>"/>
                                 <input type="text"   id="hospital_name" name="hospital_name" value="<{$hospital_name}>" class="inptText w200" />
                                 <a  href="<{:U('hospital/select')}>" mini="select" w="800" h="600" class="sumit">选择医院</a>  
-                            </label>
+                            </label> -->
                             <label>
                                 <span>分类</span>
                                 <select id="cate_id" name="cate_id" class="selecttop">
@@ -67,17 +67,17 @@
 
                         <td class="w50"><input type="checkbox" class="checkAll" rel="lawyerkown_id" /></td>
                         <td class="w50">ID</td>
-                        <td>医院</td>
-                        <td>项目标题</td>
-                        <td>图片</td>
-                        <td>市场价格</td>
-                        <td>项目价格</td>
-                        <td>售出数</td>
-                        <td>开始时间</td>
-                        <td>结束时间</td>
+						  <td>所属分类</td>
+                         <td>标题</td>
+                      
+                       
+                        <td>缩略图</td>
+                        <td>法识详情</td>
+                        <td>作者</td>
                         <td>创建时间</td>
-                        <td>创建IP</td>
-                        <td>是否审核</td>
+                        <td>状态</td>
+              
+                       
                         <td>操作</td>
 
                     </tr>
@@ -85,25 +85,34 @@
                         <tr>
                             <td><input class="child_lawyerkown_id" type="checkbox" name="lawyerkown_id[]" value="<{$var.lawyerkown_id}>" /> </td>
                             <td><{$var.lawyerkown_id}></td>
-                            <td><{$hospitals[$var['hospital_id']]['hospital_name']}></td>
-                            <td><{$var.title}></td>
+							    <foreach name="cates" item="vars">
+								<eq name="vars.cate_id"  value="$var['cate_id']">								
+								
+                            <td><{$vars['cate_name']}></td>
+							
+							   </eq>
+                                </foreach>
+							
+							<td><{$var.title}></td>
                             <td><img src="__ROOT__/attachs/<{$var.photo}>" class="w80" /></td>
-                            <td><{$var.price}></td>
-                            <td><{$var.lawyerkown_price}></td>
-                            <td><{$var.sold_num}></td>
-                            <td><{$var.bg_date}></td>
-                            <td><{$var.end_date}></td>
-                            <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
-                            <td><{$var.create_ip_area}><{$var.create_ip}></td>
-                            <!--<td><eq name="var.is_seckill" value="0">未开启<else/>正在秒杀</eq></td> -->
-                            <td><eq name="var.audit" value="0">等待审核<else/>正常</eq></td>
+                            <td><{$var.details|substr=0,60}></td>
+                            <td><{$var.author}></td>
+					   <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+							<eq name="var.closed"   value="0">
+                             <td>正常</td>
+							 <else/>
+							  <td>禁用</td>
+							 
+							 </eq>
+                         
+                           
+                           
+                           
                         <td>
-                            <neq name="var.audit" value="0">
-                            <{:BA('zhuanti/addgoods',array("goods_id"=>$var["lawyerkown_id"]),'专题','','remberBtn')}>
-                            </neq>
+                           
                             <{:BA('lawyerkown/edit',array("lawyerkown_id"=>$var["lawyerkown_id"]),'编辑','','remberBtn')}>
                             <{:BA('lawyerkown/delete',array("lawyerkown_id"=>$var["lawyerkown_id"]),'删除','act','remberBtn')}>
-                            <eq name="var.audit" value="0"> <{:BA('lawyerkown/audit',array("lawyerkown_id"=>$var["lawyerkown_id"]),'审核','act','remberBtn')}> </eq>
+                           
                         </td>
                         </tr>
                     </volist>
@@ -113,7 +122,7 @@
             <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
                 <div class="left">
                     <{:BA('lawyerkown/delete','','批量删除','list',' a2')}>
-                    <{:BA('lawyerkown/audit','','批量审核','list',' remberBtn')}>
+                   <!--  <{:BA('lawyerkown/audit','','批量审核','list',' remberBtn')}> -->
                 </div>
             </div>
         </form>

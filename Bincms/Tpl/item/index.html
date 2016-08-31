@@ -3,26 +3,26 @@
 
 <div class="mainBt">
     <ul>
-        <li class="li1">商城</li>
-        <li class="li2">项目</li>
-        <li class="li2 li3">项目列表</li>
+        <li class="li1">咨询</li>
+        <li class="li2">咨询管理</li>
+        <li class="li2 li3">咨询列表</li>
     </ul>
 </div>
 <div class="main-jsgl main-sc">
     <div class="jsglNr">
         <div class="selectNr" style="margin-top: 0px; border-top:none;">
             <div class="left">
-                <{:BA('item/create','','添加项目')}>
+                <{:BA('item/create','','添加咨询')}>
             </div>
             <div class="right">
                 <form class="search_form" method="post" action="<{:U('item/index')}>"> 
                     <div class="seleHidden" id="seleHidden">
                         <div class="seleK">
-                            <label>
+                           <!--  <label>
                                 <input type="hidden" id="hospital_id" name="hospital_id" value="<{$hospital_id|default=''}>"/>
                                 <input type="text"   id="hospital_name" name="hospital_name" value="<{$hospital_name}>" class="inptText w200" />
                                 <a  href="<{:U('hospital/select')}>" mini="select" w="800" h="600" class="sumit">选择医院</a>  
-                            </label>
+                            </label> -->
                             <label>
                                 <span>分类</span>
                                 <select id="cate_id" name="cate_id" class="selecttop">
@@ -68,10 +68,10 @@
                         <td class="w50"><input type="checkbox" class="checkAll" rel="item_id" /></td>
                         <td class="w50">ID</td>
                         <td>医院</td>
-                        <td>项目标题</td>
+                        <td>咨询标题</td>
                         <td>图片</td>
                         <td>市场价格</td>
-                        <td>项目价格</td>
+                        <td>咨询价格</td>
                         <td>售出数</td>
                         <td>开始时间</td>
                         <td>结束时间</td>
