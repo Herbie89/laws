@@ -29,7 +29,16 @@ class NewsAction extends CommonAction {
 
     public function index() {
         $Article = D('Article');
-        import('ORG.Util.Pageabc'); // 导入分页类
+        $Newscate = D('Newscate');
+        $News = D('News');
+        $Newscatearr=$Newscate->where("parent_id != 0")->select();
+        $this->assign('Newscatearr',$Newscatearr);
+        $topnewarr=$News->where("views=1 and istop=1")->select();
+
+        $nwesarr=$News->where("views=1 and istop=0")->select();
+        $this->assign("topnewarr",$topnewarr);
+        $this->assign("nwesarr",$nwesarr);
+       /* import('ORG.Util.Pageabc'); // 导入分页类
         $map = array('audit' => 1);
         $cat = (int) $this->_param('cat');
         $cates = D('Articlecate')->fetchAll();
@@ -63,7 +72,7 @@ class NewsAction extends CommonAction {
         $list = $Article->where($map)->order($orderby)->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
-        $this->assign('cates', $cates);
+        $this->assign('cates', $cates);*/
         $this->display(); // 输出模板
     }
 
