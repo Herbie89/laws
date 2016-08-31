@@ -52,9 +52,9 @@ class ItemAction extends CommonAction { //按逻辑  instructions  和  details 
             $val = $Item->_format($val);
             $list[$k] = $val;
         }
-        if ($hospital_ids) {
+       /*  if ($hospital_ids) {
             $this->assign('hospitals', D('Hospital')->itemsByIds($hospital_ids));
-        }
+        } */
         $this->assign('cates', D('Itemcate')->fetchAll());
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出

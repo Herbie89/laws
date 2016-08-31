@@ -15,6 +15,8 @@ class LawyerkowncateAction extends CommonAction {
     public function index() {
         $Lawyerkowncate = D('Lawyerkowncate');
         $list = $Lawyerkowncate->fetchAll();
+		
+		//dump($list);
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
         $this->display(); // 输出模板
