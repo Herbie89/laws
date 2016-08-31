@@ -15,7 +15,7 @@ class ArticlecateAction extends CommonAction {
     public function index() {
         $Articlecate = D('Articlecate');
         $list = $Articlecate->fetchAll();
-        dump($list);
+        //dump($list);
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
         $this->display(); // 输出模板
