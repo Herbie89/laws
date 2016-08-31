@@ -12,8 +12,8 @@ class  DatasAction extends  CommonAction{
 
     public function cityareas(){
         $data = array();
-        $data['city']       = D('City')->fetchAll();
-        $data['area']       = D('Area')->fetchAll();
+        $data['city']       = D('Chinaarea')->where(array('region_type'=>1))->select();
+        $data['area']       = D('Chinaarea')->where(array('region_type'=>2))->select();
         $data['status'] = self::BAO_REQUEST_SUCCESS;
         echo json_encode($data);
         die;
@@ -21,8 +21,8 @@ class  DatasAction extends  CommonAction{
 	
 	public  function cityarea(){
         $data = array();
-        $data['city']       = D('City')->fetchAll();
-        $data['area']       = D('Area')->fetchAll();
+        $data['city']       = D('Chinaarea')->where(array('region_type'=>1))->select();
+        $data['area']       = D('Chinaarea')->where(array('region_type'=>2))->select();
         header("Content-Type:application/javascript");
         echo   'var  cityareas = '.  json_encode($data);die;
     }

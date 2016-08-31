@@ -40,14 +40,14 @@ class LawyercateAction extends CommonAction {
         if ($cate_id = (int) $cate_id) {
             $obj = D('Lawyercate');
             if (!$detail = $obj->find($cate_id)) {
-                $this->baoError('请选择要编辑的商家分类');
+                $this->baoError('请选择要编辑的专长分类');
             }
             $detail['is_hot'] = $detail['is_hot']==0 ? 1 : 0;
             $obj->save(array('cate_id'=>$cate_id,'is_hot'=>$detail['is_hot'])); 
             $obj->cleanCache();
             $this->baoSuccess('操作成功', U('lawyercate/index'));
         } else {
-            $this->baoError('请选择要编辑的商家分类');
+            $this->baoError('请选择要编辑的专长分类');
         }
     }
     
@@ -71,7 +71,7 @@ class LawyercateAction extends CommonAction {
         if ($cate_id = (int) $cate_id) {
             $obj = D('Lawyercate');
             if (!$detail = $obj->find($cate_id)) {
-                $this->baoError('请选择要编辑的商家分类');
+                $this->baoError('请选择要编辑的专长分类');
             }
             if ($this->isPost()) {
                 $data = $this->editCheck();
@@ -86,7 +86,7 @@ class LawyercateAction extends CommonAction {
                 $this->display();
             }
         } else {
-            $this->baoError('请选择要编辑的商家分类');
+            $this->baoError('请选择要编辑的专长分类');
         }
     }
 
@@ -121,7 +121,7 @@ class LawyercateAction extends CommonAction {
                 $obj->cleanCache();
                 $this->baoSuccess('删除成功！', U('lawyercate/index'));
             }
-            $this->baoError('请选择要删除的商家分类');
+            $this->baoError('请选择要删除的专长分类');
         }
     }
     
