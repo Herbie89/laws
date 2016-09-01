@@ -47,7 +47,7 @@
 
                                 <td >|----<{$var2.cate_name}>(<{$var2.cate_id}>)</td>
                                 <td><input name="orderby[<{$var2.cate_id}>]" value="<{$var2.orderby}>" type="text" class="remberinput w80" /></td>
-                                <td > <{:BA('itemcate/create',array("parent_id"=>$var["cate_id"]),'添加子分类','load','remberBtn',600,300)}>
+                                <td > <{:BA('itemcate/create',array("parent_id"=>$var2["cate_id"]),'添加子分类','load','remberBtn',600,300)}>
                                     <eq name="var2.is_hot" value="0">
                                     <{:BA('itemcate/hots',array("cate_id"=>$var2["cate_id"]),'设为热门','act','remberBtn')}>
                             <else />
