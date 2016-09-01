@@ -178,12 +178,14 @@
                     <script>
                         $("#logo_file").uploadify({
                             'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
-                            'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyerlogo"))}>',
+                            'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyer"))}>',
                             'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
                             'buttonText': '上传律师face',
                             'fileTypeExts': '*.gif;*.jpg;*.png',
                             'queueSizeLimit': 1,
                             'onUploadSuccess': function (file, data, response) {
+							
+							alert(data);
                                 $("#data_logo").val(data);
                                 $("#logo_img").attr('src', '__ROOT__/attachs/' + data).show();
                             }
@@ -208,7 +210,7 @@
                 <script>
                     $("#photo_file").uploadify({
                         'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
-                        'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyerphoto"))}>',
+                        'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyer"))}>',
                         'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
                         'buttonText': '微信二维码',
                         'fileTypeExts': '*.gif;*.jpg;*.png',
@@ -301,7 +303,7 @@
                     </td>
                 </tr>
         <tr>
-            <td class="lfTdBt">详情：</td>
+            <td class="lfTdBt">简介：</td>
             <td class="rgTdBt">
                 <script type="text/plain" id="data_details" name="details" style="width:800px;height:360px;"><{$detail.details}></script>
             </td>
