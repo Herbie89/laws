@@ -101,7 +101,8 @@ class  UploadAction extends  CommonAction{
 				//输出多张缩略图
 				if(is_array($this->_CONFIG['attachs'][$model]['thumb'])){
 					$thum=array($name . '/thumb_' . $info[0]['savename'],$name . '/middle_' . $info[0]['savename'],$name . '/small_' . $info[0]['savename']);
-					echo json_encode($thum);
+					//echo json_encode($thum);
+					echo  $name . '/thumb_' . $info[0]['savename'];
 				}else{
 					
 					 echo $name . '/thumb_' . $info[0]['savename'];
