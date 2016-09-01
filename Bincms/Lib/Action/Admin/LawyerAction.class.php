@@ -8,8 +8,8 @@
 	// 或者联系qq:easyWe(2504585798)获得详细信息。
 class LawyerAction extends CommonAction {
 
-    private $create_fields = array('cate_id','province_id','city_id','town_id','laccount','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby');
-    private $edit_fields =array('cate_id','province_id','city_id','town_id','laccount','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby'); 
+    private $create_fields = array('cate_id','province_id','city_id','town_id','laccount','lrepassword','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby');
+    private $edit_fields =array('cate_id','province_id','city_id','town_id','laccount','lrepassword','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby'); 
 
     public function index() {
         $Lawyer = D('Lawyer');
@@ -19,14 +19,16 @@ class LawyerAction extends CommonAction {
             $map['lawyer_name|tel'] = array('LIKE', '%' . $keyword . '%');
             $this->assign('keyword', $keyword);
         }
-       /*  if ($city_id = (int) $this->_param('city_id')) {
+        
+        if ($province_id = (int) $this->_param('province_id')) {
+        	$map['province_id'] = $province_id;
+        	$this->assign('province_id', $province_id);
+        }
+       if ($city_id = (int) $this->_param('city_id')) {
             $map['city_id'] = $city_id;
             $this->assign('city_id', $city_id);
-        } */
-       /*  if ($area_id = (int) $this->_param('area_id')) {
-            $map['area_id'] = $area_id;
-            $this->assign('area_id', $area_id);
-        } */
+        } 
+     
         if ($cate_id = (int) $this->_param('cate_id')) {
             $map['cate_id'] = array('IN', D('Lawyer')->getChildren($cate_id));
             $this->assign('cate_id', $cate_id);
@@ -36,22 +38,11 @@ class LawyerAction extends CommonAction {
         $Page = new Page($count, 25); // 实例化分页类 传入总记录数和每页显示的记录数
         $show = $Page->show(); // 分页显示输出
         $list = $Lawyer->order(array('lawyer_id' => 'desc'))->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->select();
-        $ids = array();
-        foreach ($list as $k => $val) {
-            if ($val['user_id']) {
-                $ids[$val['user_id']] = $val['user_id'];
-            }
-			 if ($val['country_id']) {
-                $list[$k]['country_name'] =  D('Chinaarea')->field('region_name')->where(array('region_id'=>$val['country_id']))->find();
-				
-				$list[$k]['city_name'] = D('Chinaarea')->field('region_name')->where(array('region_id'=>$val['city_id']))->find();
-				
-            }
-			
-			
-        }
-        $this->assign('users', D('Users')->itemsByIds($ids));
-       // $this->assign('citys', D('City')->fetchAll());
+        
+       // $this->assign('users', D('Users')->itemsByIds($ids));
+     $this->assign('citys', $v=D('Chinaarea')->fetchAll());
+      
+     // dump($v);
        // $this->assign('areas', D('Area')->fetchAll());
         $this->assign('cates', D('Lawyercate')->fetchAll());
       //  $this->assign('business', D('Business')->fetchAll());
@@ -132,7 +123,7 @@ class LawyerAction extends CommonAction {
             
             if ($lawyer_id = $obj->add($data)) {
                // D('Lawyerdetails')->upDetails($lawyer_id, $ex);
-                $this->baoSuccess('添加成功', U('lawyer/apply'));
+                $this->baoSuccess('添加成功', U('lawyer/index'));
             }
             $this->baoError('操作失败！');
         } else {
@@ -212,11 +203,11 @@ class LawyerAction extends CommonAction {
         if (empty($data['laccount'])) {
         	$this->baoError('律师注册账号不能为空');
         }
-        $data['lpassword'] = htmlspecialchars($data['lpassword']);
+        $data['lpassword'] = md5(htmlspecialchars($data['lpassword']));
         if (empty($data['lpassword'])) {
         	$this->baoError('律师密码不能为空');
         }
-        $data['lrepassword'] = htmlspecialchars($data['lrepassword']);
+        $data['lrepassword'] =md5(htmlspecialchars($data['lrepassword'])) ;
         if (empty($data['lrepassword'])) {
         	$this->baoError('律师确认密码不能为空');
         }
@@ -268,8 +259,8 @@ class LawyerAction extends CommonAction {
         $data['orderby'] = (int) $data['orderby'];
         $data['qq'] = htmlspecialchars($data['qq']);
         $data['intro'] = htmlspecialchars($data['intro']);
-        $data['create_time'] = NOW_TIME;
-        $data['create_ip'] = get_client_ip();
+        $data['reg_time'] = NOW_TIME;
+        $data['reg_ip'] = get_client_ip();
         return $data;
     }
 
