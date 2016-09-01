@@ -18,7 +18,25 @@ class LawyerkownAction extends CommonAction {
     }
 // 解决niucms搜索问题开始
     public function index() {
-      $Life = D('Life');
+        //左边分类
+        $lawyerkowncate=D('Lawyerkowncate');
+        $lawyerkowncatearr=$lawyerkowncate->select();
+        dump($lawyerkowncatearr);
+        /*foreach($lawyerkowncatearr as $k=>$v){
+            $lawyerkowncatearr[$k]['chiled']=$lawyerkowncate->where("parent_id='{$v['cate_id']}'")->limit(0,6)->select();
+        }*/
+        $this->assign('lawyerkowncatearr',$lawyerkowncatearr);
+        //右边分类
+        $lawyerkowncatearrr=$lawyerkowncate->where("parent_id=0")->select();
+        foreach($lawyerkowncatearrr as $k=>$v){
+            $lawyerkowncatearrr[$k]['chiled']=$lawyerkowncate->where("parent_id='{$v['cate_id']}'")->select();
+        }
+        $this->assign('lawyerkowncatearrr',$lawyerkowncatearrr);
+
+        /*$lawyerkowncate=D('Lawyerkowncate');
+        $lawyerkowncatearr=$lawyerkowncate->limit()->select();
+        $this->assign("lawyerkowncatearr",$lawyerkowncatearr);*/
+     /* $Life = D('Life');
         import('ORG.Util.Pageabc'); // 导入分页类
         $map = $linkArr = array();
         $keyword = $this->_param('keyword');
@@ -93,7 +111,7 @@ class LawyerkownAction extends CommonAction {
         $this->assign('page', $show); // 赋值分页输出
         $this->assign('channelmeans',$chl );
         $this->assign('linkArr', $linkArr);
-       // $this->assign('tops', D('Life')->randTop());
+       // $this->assign('tops', D('Life')->randTop());*/
         $this->display();
     }
 // 解决niucms搜索问题结束
