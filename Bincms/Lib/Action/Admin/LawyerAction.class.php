@@ -266,8 +266,6 @@ class LawyerAction extends CommonAction {
         
        
         $data['orderby'] = (int) $data['orderby'];
-        $data['price'] = (int) $data['price'];
-        $data['is_pei'] = (int) $data['is_pei'];
         $data['qq'] = htmlspecialchars($data['qq']);
         $data['intro'] = htmlspecialchars($data['intro']);
         $data['create_time'] = NOW_TIME;
