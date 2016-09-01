@@ -8,8 +8,8 @@
 	// 或者联系qq:easyWe(2504585798)获得详细信息。
 class LawyerAction extends CommonAction {
 
-    private $create_fields = array('user_id', 'cate_id','city_id', 'area_id', 'business_id', 'lawyer_name', 'logo', 'mobile', 'photo', 'addr', 'tel', 'extension', 'contact', 'tags', 'near', 'is_pei', 'opentime','delivery_time', 'orderby', 'lng', 'lat', 'price');
-    private $edit_fields = array('user_id', 'cate_id','city_id', 'area_id', 'business_id', 'lawyer_name', 'mobile', 'logo', 'photo', 'addr', 'tel', 'extension', 'contact', 'tags', 'near', 'opentime','delivery_time', 'is_pei', 'orderby', 'lng', 'lat', 'price','is_ding');
+    private $create_fields = array('cate_id','province_id','city_id','town_id','laccount','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby');
+    private $edit_fields =array('cate_id','province_id','city_id','town_id','laccount','lpassword','lawyer_name','reg_ip','face','qq','intro', 'details','logo','email','is_zz','is_lvxie','istop','closed', 'mobile','nickname', 'professnumber','reg_time','photo', 'addr', 'tel','contact', 'tags', 'orderby'); 
 
     public function index() {
         $Lawyer = D('Lawyer');
@@ -129,8 +129,7 @@ class LawyerAction extends CommonAction {
             if ($words = D('Sensitive')->checkWords($details)) {
                 $this->baoError('律师介绍含有敏感词：' . $words);
             }
-            $bank = $this->_post('bank', 'htmlspecialchars');
-            unset($data['near'], $data['price'], $data['business_time'],$data['delivery_time']);
+            
             if ($lawyer_id = $obj->add($data)) {
                // D('Lawyerdetails')->upDetails($lawyer_id, $ex);
                 $this->baoSuccess('添加成功', U('lawyer/apply'));
@@ -188,62 +187,89 @@ class LawyerAction extends CommonAction {
 
     private function createCheck() {
         $data = $this->checkFields($this->_post('data', false), $this->create_fields);
-        $data['user_id'] = (int) $data['user_id'];
+       /*  $data['lawyer_id'] = (int) $data['user_id'];
         if (empty($data['user_id'])) {
             $this->baoError('管理者不能为空');
         }
         $lawyer = D('Lawyer')->find(array('where' => array('user_id' => $data['user_id'])));
         if (!empty($lawyer)) {
             $this->baoError('该管理者已经拥有律师了');
-        }
+        } */
 
         $data['cate_id'] = (int) $data['cate_id'];
         if (empty($data['cate_id'])) {
-            $this->baoError('分类不能为空');
+            $this->baoError('所属分类不能为空');
         } 
+        $data['province_id'] = (int) $data['province_id'];
         $data['city_id'] = (int) $data['city_id'];
-        $data['area_id'] = (int) $data['area_id'];
-        if (empty($data['area_id'])) {
-            $this->baoError('所在区域不能为空');
-        } $data['business_id'] = (int) $data['business_id'];
-        if (empty($data['business_id'])) {
-            $this->baoError('所在商圈不能为空');
-        } $data['lawyer_name'] = htmlspecialchars($data['lawyer_name']);
+        if (empty($data['province_id'])) {
+            $this->baoError('所在省市不能为空');
+        } $data['city_id'] = (int) $data['city_id'];
+        if (empty($data['city_id'])) {
+            $this->baoError('所在省市不能为空');
+        }
+        $data['laccount'] = htmlspecialchars($data['laccount']);
+        if (empty($data['laccount'])) {
+        	$this->baoError('律师注册账号不能为空');
+        }
+        $data['lpassword'] = htmlspecialchars($data['lpassword']);
+        if (empty($data['lpassword'])) {
+        	$this->baoError('律师密码不能为空');
+        }
+        $data['lrepassword'] = htmlspecialchars($data['lrepassword']);
+        if (empty($data['lrepassword'])) {
+        	$this->baoError('律师确认密码不能为空');
+        }
+        
+        if ($data['lrepassword'] != $data['lpassword']) {
+        	$this->baoError('两次密码不一致');
+        }
+        
+         $data['lawyer_name'] = htmlspecialchars($data['lawyer_name']);
         if (empty($data['lawyer_name'])) {
-            $this->baoError('律师名称不能为空');
-        } $data['logo'] = htmlspecialchars($data['logo']);
-        if (empty($data['logo'])) {
-            $this->baoError('请上传律师LOGO');
+            $this->baoError('真实不能为空');
+        } 
+        $data['face'] = htmlspecialchars($data['face']);
+        if (empty($data['face'])) {
+            $this->baoError('请上传律师face');
         }
-        if (!isImage($data['logo'])) {
-            $this->baoError('律师LOGO格式不正确');
-        } $data['photo'] = htmlspecialchars($data['photo']);
-        if (empty($data['photo'])) {
-            $this->baoError('请上传律师缩略图');
-        }
-        if (!isImage($data['photo'])) {
-            $this->baoError('律师缩略图格式不正确');
-        }
+        if (!isImage($data['face'])) {
+            $this->baoError('律师face格式不正确');
+        } 
+        $data['photo'] = htmlspecialchars($data['photo']);
+        
         $data['addr'] = htmlspecialchars($data['addr']);
         if (empty($data['addr'])) {
             $this->baoError('律师地址不能为空');
         }
         $data['tel'] = htmlspecialchars($data['tel']);
         $data['mobile'] = htmlspecialchars($data['mobile']);
-        if (empty($data['tel']) && empty($data['mobile'])) {
-            $this->baoError('律师电话不能为空');
+        if ( empty($data['mobile'])) {
+            $this->baoError('律师手机不能为空');
         }
-
-        $data['extension'] = htmlspecialchars($data['extension']);
+        
+        $data['professnumber'] = htmlspecialchars($data['professnumber']);
+        if ( empty($data['professnumber'])) {
+        	$this->baoError('律师资格证不能为空');
+        }
+ 
         $data['contact'] = htmlspecialchars($data['contact']);
+        if ( empty($data['professnumber'])) {
+        	$this->baoError('应急联系人不能为空');
+        }
+        
         $data['tags'] = str_replace(',', '，', htmlspecialchars($data['tags']));
-        $data['near'] = htmlspecialchars($data['near']);
-        $data['business_time'] = htmlspecialchars($data['business_time']);
+       
+        if ( empty($data['professnumber'])) {
+        	$this->baoError('律师专长不能为空');
+        }
+        
+       
         $data['orderby'] = (int) $data['orderby'];
         $data['price'] = (int) $data['price'];
         $data['is_pei'] = (int) $data['is_pei'];
-        $data['lng'] = htmlspecialchars($data['lng']);
-        $data['lat'] = htmlspecialchars($data['lat']);
+        $data['qq'] = htmlspecialchars($data['qq']);
+        $data['intro'] = htmlspecialchars($data['intro']);
         $data['create_time'] = NOW_TIME;
         $data['create_ip'] = get_client_ip();
         return $data;
