@@ -105,10 +105,10 @@ class IndexAction extends CommonAction{
                 array('ELT',NOW_TIME),
                 array('EGT',$bg_time),
             )))->count();
-         $counts['coupon'] = (int)D('Coupondownload')->count();
-         $counts['dianping'] = (int)D('Shopdianping')->count();
+         $counts['coupon'] = (int)D('item')->count();
+         $counts['dianping'] = (int)D('Reply')->count();
          $counts['users'] = (int)D('Users')->count();
-         $counts['shops'] = (int)D('Shop')->count();
+         $counts['shops'] = (int)D('Lawyer')->count();
          $counts['post'] = (int)D('Post')->count();
          $v = require BASE_PATH.'/version.php';//
          $this->assign('v',$v);
