@@ -33,9 +33,12 @@ class NewsAction extends CommonAction {
         $News = D('News');
         $Newscatearr=$Newscate->where("parent_id != 0")->select();
         $this->assign('Newscatearr',$Newscatearr);
-        $topnewarr=$News->where("views=1 and istop=1")->select();
-
-        $nwesarr=$News->where("views=1 and istop=0")->select();
+        $topnewarr=$News->where("istop=1")->select();
+        foreach($topnewarr as $k=>$v){
+            $topnewarr[$k]['title']=msubstr($v['title'],0,8,"utf-8");
+            $topnewarr[$k]['details']=mb_substr($v['title'],0,60);
+        }
+        $nwesarr=$News->where("istop=0")->select();
         $this->assign("topnewarr",$topnewarr);
         $this->assign("nwesarr",$nwesarr);
        /* import('ORG.Util.Pageabc'); // 导入分页类
