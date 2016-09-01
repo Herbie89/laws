@@ -10,17 +10,51 @@
     <div class="mainScAdd">
         <div class="tableBox">
             <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
-                <tr>
-                    <td class="lfTdBt">管理者：</td>
-                   <!--  <td class="rgTdBt">
-                        <div class="lt">
-                            <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" />
-                            <input class="scAddTextName w210 sj" type="text" name="nickname" id="nickname"  value="" />
-                        </div>
-                        <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择用户</a>
-                    </td> -->
-                </tr>    <tr>
-                    <td class="lfTdBt">所属专长：</td>
+               
+             <tr>
+                            <td class="lfTdBt">账户：</td>
+                            <td class="rgTdBt"><input type="text" name="data[laccount]" value="<{$detail.laccount|default=''}>" class="scAddTextName w200" />
+                                <code>以字母开头四至十六个字母</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lfTdBt">密码：</td>
+                            <td class="rgTdBt"><input type="password" name="data[lpassword]" value="<{$detail.lpassword|default=''}>" class="scAddTextName w200" />
+                            </td>
+                       </tr>
+		             <tr>
+                            <td class="lfTdBt">确认密码：</td>
+                            <td class="rgTdBt"><input type="password" name="data[lrepassword]" value="<{$detail.lrepassword|default=''}>" class="scAddTextName w200" />
+                            </td>
+                       </tr>
+		  
+		  
+		      <tr>
+                    <td class="lfTdBt">昵称：</td>
+                    <td class="rgTdBt"><input type="text" name="data[nickname]" value="<{$detail.nickname|default=''}>" class="scAddTextName w210" />
+
+                    </td>
+                </tr>
+		  
+              <tr>
+                    <td class="lfTdBt">真实姓名：</td>
+                    <td class="rgTdBt"><input type="text" name="data[lawyer_name]" value="<{$detail.lawyer_name|default=''}>" class="scAddTextName w210" />
+
+                    </td>
+                </tr>	
+           
+		     <!--  <tr>
+                    <td class="lfTdBt">律所名称：</td>
+                    <td class="rgTdBt"><input type="text" name="data[lawyer_home]" value="<{$detail.lawyer_home|default=''}>" class="scAddTextName w210" />
+
+                    </td>
+                </tr>	 -->
+		     
+		   
+		   
+
+			   <tr>
+                    <td class="lfTdBt">所属类别：</td>
                     <td class="rgTdBt">
                         <select id="cate_id" name="data[cate_id]" class="seleFl w210">
                             <foreach name="cates" item="var">
@@ -36,13 +70,15 @@
                         </select>
 
                     </td>
-                </tr>    
+                </tr>  
+
+               			
                 <tr>
                     <td class="lfTdBt">所在省、市：</td>
                     <td class="rgTdBt">
                         
-                          <select name="data[region_id]" style="float: left;"  id="city_id" class="seleFl w210"></select>
-                       <select name="data[area_id]" style="float: left;"  id="area_id" class="seleFl w210"></select>
+                        <select name="data[province_id]" style="float: left;"  id="city_id" class="seleFl w210"></select>
+                       <select name="data[city_id]" style="float: left;"  id="area_id" class="seleFl w210"></select>
 
                     </td>
                 </tr>
@@ -106,7 +142,7 @@
                 <tr>
                     <td class="lfTdBt">所在地区：</td>
                     <td class="rgTdBt">
-                        <select name="data[business_id]" id="business_id" class="seleFl w210">
+                        <select name="data[town_id]" id="business_id" class="seleFl w210">
                             <option value="0">请选择...</option>
                             <foreach name="business" item="var">
                                 <option value="<{$var.business_id}>"><{$var.business_name}></option>
@@ -114,12 +150,8 @@
                         </select>
 
                     </td>
-                </tr><tr>
-                    <td class="lfTdBt">律师名称：</td>
-                    <td class="rgTdBt"><input type="text" name="data[lawyer_name]" value="<{$detail.lawyer_name|default=''}>" class="scAddTextName w210" />
-
-                    </td>
                 </tr>
+				
 				<tr>
             <td class="lfTdBt">律师地址：</td>
             <td class="rgTdBt">
@@ -131,15 +163,15 @@
                     <td class="lfTdBt">
                 <js file='__PUBLIC__/js/uploadify/jquery.uploadify.min.js'/>
                 <link rel="stylesheet" href="__PUBLIC__/js/uploadify/uploadify.css">
-               律师LOGO：
+               律师face：
                 </td>
                 <td class="rgTdBt">
                     <div style="width: 300px;height: 100px; float: left;">
-                        <input type="hidden" name="data[logo]" value="<{$detail.logo}>" id="data_logo" />
+                        <input type="hidden" name="data[face]" value="<{$detail.face}>" id="data_logo" />
                         <input id="logo_file" name="logo_file" type="file" multiple="true" value="" />
                     </div>
                     <div style="width: 300px;height: 100px; float: left;">
-                        <img id="logo_img" width="80" height="80"  src="__ROOT__/attachs/<{$detail.logo|default='default.jpg'}>" />
+                        <img id="logo_img" width="80" height="80"  src="__ROOT__/attachs/<{$detail.face|default='default.jpg'}>" />
                         <a href="<{:U('setting/attachs')}>">缩略图设置</a>
                         建议尺寸:<{$CONFIG.attachs.lawyerlogo.thumb}>
                     </div>
@@ -148,7 +180,7 @@
                             'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
                             'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyerlogo"))}>',
                             'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
-                            'buttonText': '上传律师LOGO',
+                            'buttonText': '上传律师face',
                             'fileTypeExts': '*.gif;*.jpg;*.png',
                             'queueSizeLimit': 1,
                             'onUploadSuccess': function (file, data, response) {
@@ -159,9 +191,10 @@
 
                     </script>
                 </td>
-            </tr><tr>
+            </tr>
+			 <tr>
             <td class="lfTdBt">
-                律师缩略图：
+                微信二维码：
             </td>
             <td class="rgTdBt">
                 <div style="width: 300px; height: 100px; float: left;">
@@ -170,14 +203,14 @@
                 </div>
                 <div style="width: 300px; height: 100px; float: left;">
                     <img id="photo_img" width="80" height="80"  src="__ROOT__/attachs/<{$detail.photo|default='default.jpg'}>" />
-                    <a href="<{:U('setting/attachs')}>">缩略图设置</a>建议尺寸:<{$CONFIG.attachs.lawyerphoto.thumb}>
+                    <a href="<{:U('setting/attachs')}>">微信二维码设置</a>建议尺寸:<{$CONFIG.attachs.lawyerphoto.thumb}>
                 </div>
                 <script>
                     $("#photo_file").uploadify({
                         'swf': '__PUBLIC__/js/uploadify/uploadify.swf?t=<{$nowtime}>',
                         'uploader': '<{:U("app/upload/uploadify",array("model"=>"lawyerphoto"))}>',
                         'cancelImg': '__PUBLIC__/js/uploadify/uploadify-cancel.png',
-                        'buttonText': '上传律师缩略图',
+                        'buttonText': '微信二维码',
                         'fileTypeExts': '*.gif;*.jpg;*.png',
                         'queueSizeLimit': 1,
                         'onUploadSuccess': function (file, data, response) {
@@ -188,7 +221,19 @@
 
                 </script>
             </td>
-        </tr>
+        </tr> 
+		
+		 <tr>
+                    <td class="lfTdBt">职业证号：</td>
+                    <td class="rgTdBt"><input type="text" name="data[professnumber]" value="<{$detail.lawyer_name|default=''}>" class="scAddTextName w210" />
+
+                    </td>
+                </tr>
+		
+		
+		
+		
+		
 		
 		<tr>
             <td class="lfTdBt">律师电话：</td>
@@ -197,19 +242,19 @@
             </td>
         </tr>
         <tr>
-            <td class="lfTdBt">分机：</td>
-            <td class="rgTdBt"><input type="text" name="data[extension]" value="<{$detail.extension|default=''}>" class="scAddTextName w210" />
+            <td class="lfTdBt">手机号：</td>
+            <td class="rgTdBt"><input type="text" name="data[mobile]" value="<{$detail.mobile|default=''}>" class="scAddTextName w210" />
 
             </td>
         </tr>
         <tr>
-            <td class="lfTdBt">联系人：</td>
+            <td class="lfTdBt">应急联系人：</td>
             <td class="rgTdBt"><input type="text" name="data[contact]" value="<{$detail.contact|default=''}>" class="scAddTextName w210" />
 
             </td>
         </tr>
         <tr>
-            <td class="lfTdBt">标签：</td>
+            <td class="lfTdBt">擅长：</td>
             <td class="rgTdBt"><input type="text" name="data[tags]" value="<{$detail.tags|default=''}>" class="scAddTextName w210" />
                 <code>每个标签用“，”分隔</code>
             </td>
@@ -234,37 +279,31 @@
 
             </td>
         </tr> -->
+		 
+
+        <tr>
+            <td class="lfTdBt">QQ：</td>
+            <td class="rgTdBt"><input type="text" name="data[qq]" value="<{$detail.qq|default=''}>" class="scAddTextName w210" />
+            </td>
+        </tr>
+		
 		<tr>
-            <td class="lfTdBt">营业时间：</td>
-            <td class="rgTdBt"><input type="text" name="data[business_time]" value="<{$detail.business_time|default=''}>" class="scAddTextName w210" />
-                <code>例如8:00-19：00</code>
-            </td>
-        </tr><tr>
-            <td class="lfTdBt">固定排名：</td>
-            <td class="rgTdBt"><input type="text" name="data[orderby]" value="<{$detail.orderby|default='100'}>" class="scAddTextName w210" />
-                <code>1就是固定排名在第一位，一般建议不需要设置这个值！</code>
+            <td class="lfTdBt">邮箱：</td>
+            <td class="rgTdBt"><input type="text" name="data[email]" value="<{$detail.email|default=''}>" class="scAddTextName w210" />
+                
             </td>
         </tr>
-
-        <tr>
-            <td class="lfTdBt">人均消费：</td>
-            <td class="rgTdBt"><input type="text" name="data[price]" value="<{$detail.price|default='0'}>" class="scAddTextName w210" />
-            </td>
-        </tr>
-        <tr>
-            <td class="lfTdBt">律师坐标：</td>
-            <td class="rgTdBt">
-                <div class="lt">
-                    经度<input type="text" name="data[lng]" id="data_lng" value="<{$detail.lng|default=''}>" class="scAddTextName w200" />
-                    纬度 <input type="text" name="data[lat]" id="data_lat" value="<{$detail.lat|default=''}>" class="scAddTextName w200" />
-                </div>
-                <a style="margin-left: 10px;" mini="select"  w="600" h="600" href="<{:U('public/maps')}>" class="seleSj">百度地图</a>
-        </tr>
-
+		<tr>
+     <tr>
+                    <td class="lfTdBt">职业感言：</td>
+                    <td class="rgTdBt"><textarea  name="data[intro]" cols="50" rows="10" ><{$detail.intro|default=''}></textarea>
+                        <code>简单的文章描述</code>
+                    </td>
+                </tr>
         <tr>
             <td class="lfTdBt">详情：</td>
             <td class="rgTdBt">
-                <script type="text/plain" id="data_details" name="details" style="width:800px;height:360px;"><{$ex.details}></script>
+                <script type="text/plain" id="data_details" name="details" style="width:800px;height:360px;"><{$detail.details}></script>
             </td>
         </tr>
         <link rel="stylesheet" href="__PUBLIC__/umeditor/themes/default/css/umeditor.min.css" type="text/css">
@@ -281,8 +320,49 @@
                     });
         </script>
 
-     
+      <tr>
+           <td class="lfTdBt">固定排名：</td>
+            <td class="rgTdBt"><input type="text" name="data[orderby]" value="<{$detail.orderby|default='100'}>" class="scAddTextName w210" />
+                <code>1就是固定排名在第一位，一般建议不需要设置这个值！</code>
+            </td>
+        </tr>
 
+		 <tr>
+            <td class="lfTdBt">是否推荐：</td>
+            <td class="rgTdBt">
+                <label><span style="margin-left: 20px;">是：</span><input type="radio" name="data[istop]" value="1" /></label>
+				 <label><span style="margin-left: 20px;">否：</span><input type="radio" name="data[istop]" value="0" checked /></label>
+
+            </td>
+			
+			
+			 
+        </tr>
+		
+		 <tr>
+            <td class="lfTdBt">是否律协认证：</td>
+            <td class="rgTdBt">
+                <label><span style="margin-left: 20px;">是：</span><input type="radio" name="data[is_lvxie]" value="1" /></label>
+				 <label><span style="margin-left: 20px;">否：</span><input type="radio" name="data[is_lvxie]" value="0"  checked /></label>
+
+            </td>
+			
+			
+			 
+        </tr>
+		
+		 <tr>
+            <td class="lfTdBt">是否本站认证：</td>
+            <td class="rgTdBt">
+                <label><span style="margin-left: 20px;">是：</span><input type="radio" name="data[is_zz]" value="1" /></label>
+				 <label><span style="margin-left: 20px;">否：</span><input type="radio" name="data[is_zz]" value="0" checked /></label>
+
+            </td>
+			
+			
+			 
+        </tr>
+		
     </table>
        <input type="submit" value="确认添加" class="smtQrIpt" />
 </div>

@@ -47,8 +47,8 @@
                         </label>
                         <label>
                             <span>区域：</span>
-                             <select name="city_id" id="city_id"  class="select w100"></select>
-                            <select name="area_id" id="area_id"  class="select w100"></select>
+                             <select name="province_id" id="city_id"  class="select w100"></select>
+                            <select name="city_id" id="area_id"  class="select w100"></select>
                      
                         </label>
                 <script src="<{:U('app/datas/cityarea')}>"></script>
@@ -95,7 +95,7 @@
                         }
                         $("#city_id").change(function(){
                             city_id = $(this).val();
-							alert(city_id);
+							//alert(city_id);
                             changeCity($(this).val());
                         });
                     });
