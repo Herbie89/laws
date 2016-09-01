@@ -118,29 +118,75 @@
                 <tr>
                     <td class="w50"><input type="checkbox" class="checkAll" rel="lawyer_id" /></td>
                     <td class="w50">ID</td>
-                    <td>管理者(UID)</td>
-                    <td>分类</td>
-                    <td>所在地区</td>
-                    <td>律师名称</td>
+                    <td>账号</td>
+                    <td>所属分类</td>
+                  
+                    <td>律师昵称</td>
+					 <td>律师名称</td>
                     <td>律师标签</td>
-                    <td>律师LOGO</td>
-                    <td>律师电话</td>
-					
-                    <td>入驻时间</td>
+                    <td>律师图像</td>
+                    <td>手机号</td>
+					 <td>执照号</td>
+					   <td>QQ</td>
+					   <td>Email</td>
+                     <td>所在地区</td>
+					<td>认证状态</td>
+					 <td>入驻时间</td>
                     <td class="w360">操作</td>
                 </tr>
                 <foreach name="list" item="var">
                     <tr>
                         <td><input class="child_lawyer_id" type="checkbox" name="lawyer_id[]" value="<{$var.lawyer_id}>" /></td>
                         <td><{$var.lawyer_id}></td>
-                        <td><{$users[$var['user_id']]['account']}>(<{$var.user_id}>)</td>
+                        <td><{$var['laccount']}></td>
                         <td><{$cates[$var['cate_id']]['cate_name']}></td>
-                        <td><{$var[country_name][region_name]}>-<{$var[city_name][region_name]}>    </td>
-                        <td><{$var.lawyer_name}></td>
+						 
+					   <td><{$var.nickname}></td> 
+						<td><{$var.lawyer_name}></td>
                         <td><{$var.tags}></td>
-                        <td><img src="__ROOT__/attachs/<{$var.logo}>" class="w80" /></td>
-                        <td><{$var.tel}><if condition="$var['extension'] neq null">转<{$var.extension}></if></td>
-                    <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                        <td><img src="__ROOT__/attachs/<{$var.face}>" class="w80" /></td>
+                        <td><{$var.mobile}></td>
+						<td><{$var.professnumber}></td>
+						<td><{$var.qq}></td>
+						<td><{$var.email}></td>
+						
+						 <td>
+						 <foreach name="citys" item="cityids">
+						 
+                        <eq  name="cityids.region_id"   value="$var['province_id']" >
+						     <{$cityids[region_name]}>
+						     </eq>
+					
+						  <eq  name="cityids.region_id"   value="$var['city_id']" >
+						    -<{$cityids[region_name]}>
+						     </eq>
+					     <eq  name="cityids.region_id"   value="$var['town_id']" >
+						    - <{$cityids[region_name]}>
+						     </eq>
+                       
+                         </foreach>
+						 <br>
+						 <{$var['addr']}>
+						 
+						 
+                          </td>
+						<td>
+						 <eq name="var.is_zz" value="1">
+						 
+						 本网已认证
+						<else/>
+						等待本网认证
+						 </eq>  <br>
+                         <eq name="var.is_lvxie" value="1">
+						 
+						律协认证
+						<else/>
+						等待律协认证
+						 </eq>  
+                      </td>
+						 
+						
+                    <td><{$var.reg_time|date='Y-m-d H:i:s',###}></td>
                     <td>
                     
                   <!--   <eq name="var.is_pei" value="1">
@@ -156,7 +202,7 @@
                     </eq>                  --> 
                     <{:BA('lawyer/edit',array("lawyer_id"=>$var["lawyer_id"]),'编辑','','remberBtn')}>
                     <{:BA('lawyer/delete',array("lawyer_id"=>$var["lawyer_id"]),'删除','act','remberBtn')}>
-                    <a target="_blank" class="remberBtn" href="<{:U('lawyer/login',array('lawyer_id'=>$var['lawyer_id']))}>">管理</a>
+                    <a target="_blank" class="remberBtn" href="<{:U('/lawyer/login',array('lawyer_id'=>$var['lawyer_id']))}>">管理</a>
                     </td>
                     </tr>
                 </foreach>
