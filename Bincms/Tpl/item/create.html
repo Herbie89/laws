@@ -14,16 +14,16 @@
 
 
             <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
-               <!--  <tr>
-                    <td  class="lfTdBt">医院：</td>
+               <tr>
+                    <td class="lfTdBt">咨询人：</td>
                     <td class="rgTdBt">
                         <div class="lt">
-                            <input type="hidden" id="hospital_id" oninput="alert(this.value);" name="data[hospital_id]" value="<{$detail.hospital_id|default=''}>"/>
-                            <input type="text" id="hospital_name" name="hospital_name" value="" class="scAddTextName sj" />
+                            <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" />
+                            <input class="scAddTextName w210 sj" type="text" name="nickname" id="nickname"  value="" />
                         </div>
-                        <a mini="select"  w="1000" h="600" href="<{:U('hospital/select')}>" class="seleSj">选择医院</a>
+                        <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择用户</a>
                     </td>
-                </tr> -->
+                </tr> 
                 <script>
                     /*
                      $(document).ready(function (e) {
@@ -62,18 +62,18 @@
                     </td> 
                 </tr>
                 <tr>
-                    <td  class="lfTdBt">项目名称：</td>
+                    <td  class="lfTdBt">咨询标题：</td>
                     <td class="rgTdBt"><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="manageInput" />
 
                     </td>
                 </tr>
-                <tr>
-                    <td  class="lfTdBt">项目副标题：</td>
+              <!--   <tr>
+                    <td  class="lfTdBt">咨询副标题：</td>
                     <td class="rgTdBt"><input type="text" name="data[intro]" value="<{$detail.intro|default=''}>" class="manageInput" />
 
                     </td>
-                </tr>
-                <tr>
+                </tr> -->
+              <!--   <tr>
                     <td class="lfTdBt">参加活动：</td>
                     <td class="rgTdBt">
                         <select id="activity_id" name="data[activity_id]" class="seleFl w300">
@@ -83,15 +83,15 @@
                             </foreach>
                         </select>
                     </td>
-                </tr>
-                <tr>
+                </tr> -->
+              <!--   <tr>
                     <td class="lfTdBt">选择分院：</td>
                     <td id="branch_select" class="rgTdBt">
                 <foreach name="branch" item="item">
                     <label style="margin-right: 10px;"><span><{$item.name}>：</span><input style="width: 20px; height: 20px;" type="checkbox" name="branch_id[]" value="<{$item.branch_id}>" /></label>
                 </foreach>
                 </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td  class="lfTdBt">
                 <js file='__PUBLIC__/js/uploadify/jquery.uploadify.min.js'/>
@@ -125,8 +125,8 @@
                     </script>
                 </td>
                 </tr>
-                <tr>
-                    <td  class="lfTdBt">项目组图：</td>
+<!--                 <tr>
+                    <td  class="lfTdBt">咨询组图：</td>
                     <td class="rgTdBt">
                         <div>
                             <input id="thumb_file" name="logo_file" type="file" multiple="true" value="" />
@@ -160,90 +160,28 @@
 
                         </script>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td  class="lfTdBt">属性：</td>
                     <td class="rgTdBt">
                         <label><span>是否热门：</span><input type="checkbox" name="data[is_hot]" value="1" /></label>
-                        <label><span style="margin-left: 20px;">是否精选：</span><input type="checkbox" name="data[is_chose]" value="1" /></label>
-                        <label><span style="margin-left: 20px;">是否新单：</span><input type="checkbox" name="data[is_new]" value="1" /></label>
-                        <label><span style="margin-left: 20px;">是否免预约：</span><input type="checkbox" name="data[freebook]" value="1" /></label>
-                        <label><span style="margin-left: 20px;">是否返现1%：</span><input type="checkbox" name="data[is_return_cash]" value="1" /></label><label><span style="margin-left: 20px;">是否仅能下一次单</span><input type="checkbox" name="data[xiadan]" value="1" /></label>
-                    </td>
+                        <label><span style="margin-left: 20px;">是否人气：</span><input type="checkbox" name="data[is_chose]" value="1" /></label>
+                        <label><span style="margin-left: 20px;">是否新咨询：</span><input type="checkbox" name="data[is_new]" value="1" /></label>
+                        <label><span style="margin-left: 20px;">是否vip：</span><input type="checkbox" name="data[freebook]" value="1" /></label>
+                        
+				   </td>
                 </tr>
- 				<tr>
-                    <td  class="lfTdBt">每天项目份数：</td>
-                    <td class="rgTdBt"><input type="text" name="data[xiangou]" value="<{$detail.xiangou|default='0'}>" class="manageInput" />
-					<code>0表示不限购</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="lfTdBt">市场价格：</td>
-                    <td class="rgTdBt"><input type="text" name="data[price]" value="<{$detail.price|default=''}>" class="manageInput" />
-
-                    </td>
-                </tr><tr>
-                    <td  class="lfTdBt">项目价格：</td>
-                    <td class="rgTdBt"><input type="text" name="data[item_price]" value="<{$detail.item_price|default=''}>" class="manageInput" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="lfTdBt">手机下单优惠价格：</td>
-                    <td class="rgTdBt"><input type="text" name="data[mobile_fan]" value="<{$detail.mobile_fan|default=''}>" class="manageInput" />
-
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="lfTdBt">可使用积分：</td>
-                    <td class="rgTdBt"><input type="text" name="data[use_integral]" value="<{$detail.use_integral|default=''}>" class="manageInput" />
-                        <code>100积分抵用1块钱RMB</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="lfTdBt">结算价格：</td>
-                    <td class="rgTdBt"><input type="text" name="data[settlement_price]" value="<{$detail.settlement_price|default=''}>" class="manageInput" />
-                        <code>网站和医院结算的价格</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="lfTdBt">库存：</td>
-                    <td class="rgTdBt"><input type="text" name="data[num]" value="<{$detail.num|default=''}>" class="manageInput" />
-
-                    </td>
-                </tr>
-
-                <tr>
-                    <td  class="lfTdBt">售出数：</td>
-                    <td class="rgTdBt"><input type="text" name="data[sold_num]" value="<{$detail.sold_num|default=''}>" class="manageInput" />
-
-                    </td>
-                </tr>
+ 				
                 <tr>
                     <td  class="lfTdBt">排序：</td>
                     <td class="rgTdBt"><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="manageInput" />
 
                     </td>
                 </tr>
-                <tr>
-                    <td  class="lfTdBt">开始时间：</td>
-                    <td class="rgTdBt"><input type="text" name="data[bg_date]" value="<{$detail.bg_date|default=''}>" onfocus="WdatePicker();"  class="inputData" />
-
-                    </td>
-                </tr><tr>
-                    <td  class="lfTdBt">结束时间：</td>
-                    <td class="rgTdBt"><input type="text" name="data[end_date]" value="<{$detail.end_date|default=''}>" onfocus="WdatePicker();"  class="inputData" />
-
-                    </td>
-                </tr>
-                <tr>
-                    <td  class="lfTdBt">虚拟物品过期时间：</td>
-                    <td class="rgTdBt"><input type="text" name="data[fail_date]" value="<{$detail.fail_date|default=''}>" onfocus="WdatePicker();"  class="inputData" />
-
-                    </td>
-                </tr>
+               
 
                 <tr>
-                    <td  class="lfTdBt">项目详情：</td>
+                    <td  class="lfTdBt">咨询内容：</td>
                     <td class="rgTdBt">
                         <script type="text/plain" id="data_details" name="details" style="width:800px;height:360px;"><{$detail.details}></script>
                     </td>
@@ -261,7 +199,7 @@
                             focus: false
                         });
                 </script>
-                <tr>
+               <!--  <tr>
                     <td  class="lfTdBt">购买须知：</td>
                     <td class="rgTdBt">
                         <script type="text/plain" id="instructions" name="instructions" style="width:800px;height:360px;"><{$detail.instructions}></script>
@@ -277,7 +215,7 @@
                         focus: false
                     });
                 </script>
-
+ -->
             </table>
         </div>
         <div class="smtQr"><input type="submit" value="确认添加" class="smtQrIpt" /></div>

@@ -63,6 +63,7 @@
                                     'fileTypeExts': '*.gif;*.jpg;*.png',
                                     'queueSizeLimit': 1,
                                     'onUploadSuccess': function (file, data, response) {
+									  // alert(data['0']);
                                         $("#data_photo").val(data);
                                         $("#photo_img").attr('src', '__ROOT__/attachs/' + data).show();
                                     }

@@ -27,7 +27,7 @@
                     <td class="rgTdBt"><input type="text" name="data[imgurl]" value="<{$CONFIG.site.imgurl}>" class="scAddTextName " />
                         <code>例如：http://www.milimeng.cn 一般情况下是和站点网址一样，如果做了CDN加速一般就可能是其他的域名</code></td>
                 </tr>
-                <tr>
+               <!--  <tr>
                     <td class="lfTdBt">android下载地址：</td>
                     <td class="rgTdBt"><input type="text" name="data[android]" value="<{$CONFIG.site.android}>" class="scAddTextName " />
                         <code>android下载地址</code></td>
@@ -36,7 +36,7 @@
                     <td class="lfTdBt">IOS下载地址：</td>
                     <td class="rgTdBt"><input type="text" name="data[ios]" value="<{$CONFIG.site.ios}>" class="scAddTextName " />
                         <code>IOS下载地址</code></td>
-                </tr>
+                </tr> -->
          
                 <tr>
                     <td class="lfTdBt">LOGO：</td>
@@ -78,23 +78,23 @@
                     <td class="lfTdBt">邮件：</td>
                     <td class="rgTdBt"><input type="text" name="data[email]" value="<{$CONFIG.site.email}>" class="scAddTextName " /></td>
                 </tr>
-                <tr>
+              <!--   <tr>
                     <td class="lfTdBt">整合UCENTER：</td>
                     <td class="rgTdBt">
                         <label><input type="radio" name="data[ucenter]" <eq name="CONFIG.site.ucenter" value="1">checked="checked"</eq> value="1"  />开启</label>
                         <label><input type="radio" name="data[ucenter]"  <eq name="CONFIG.site.ucenter" value="0">checked="checked"</eq>  value="0"  />不开启</label>
                         <code>开启这个需要先在UCENTER接口配置先配置好！</code>
                     </td>
-                </tr>
+                </tr> -->
             
-                   <tr>
+                 <!--   <tr>
                     <td class="lfTdBt">微信自动绑定账号：</td>
                     <td class="rgTdBt">
                         <label><input type="radio" name="data[weixin]" <eq name="CONFIG.site.weixin" value="1">checked="checked"</eq> value="1"  />开启</label>
                         <label><input type="radio" name="data[weixin]"  <eq name="CONFIG.site.weixin" value="0">checked="checked"</eq>  value="0"  />不开启</label>
                         <code>开启后微信端会自动跳转到绑定账号，如果已经绑定账号将自动登录！</code>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td class="lfTdBt">ICP备案：</td>
                     <td class="rgTdBt"><input type="text" name="data[icp]" value="<{$CONFIG.site.icp}>" class="scAddTextName " /></td>
@@ -120,7 +120,7 @@
                     <td class="rgTdBt"><textarea name="data[tongji]" cols="50" rows="5"><{$CONFIG.site.tongji}></textarea></td>
                 </tr>
                 
-                <tr>
+               <!--  <tr>
                     <td class="lfTdBt">默认城市：</td>
                     <td class="rgTdBt">
                         <select name="data[city_id]" class="selectOption">
@@ -129,14 +129,14 @@
                             <?php }?>
                         </select>
                     </td>
-                </tr>
-                <tr>
+                </tr> -->
+             <!--    <tr>
                     <td class="lfTdBt" style="padding-right: 0px;">城市中心地图坐标：</td>
                     <td class="rgTdBt">
                         经度  <input type="text" name="data[lng]" value="<{$CONFIG.site.lng}>" class="scAddTextName " />
                         纬度 <input type="text" name="data[lat]" value="<{$CONFIG.site.lat}>" class="scAddTextName " /></td>
                 </tr>
-     
+      -->
             </table>
         </div>
         <div class="smtQr"><input type="submit" value="确认保存" class="smtQrIpt" /></div>

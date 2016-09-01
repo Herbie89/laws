@@ -32,7 +32,7 @@
                                         <option value="<{$var.cate_id}>"  <eq name="var.cate_id" value="$cate_id">selected="selected"</eq> ><{$var.cate_name}></option>                
                                         <foreach name="cates" item="var2">
                                             <eq name="var2.parent_id" value="$var.cate_id">
-                                            <option value="<{$var2.cate_id}>"  <eq name="var2.cate_id" value="$cate_id">selected="selected"</eq> > &nbsp;&nbsp;<{$var2.cate_name}></option>
+                                            <option value="<{$var2.cate_id}>"  <eq name="var2.cate_id" value="$cate_id">selected="selected"</eq> > &nbsp;&nbsp;&nbsp;&nbsp;<{$var2.cate_name}></option>
                                             </eq>
                                         </foreach>
                                         </eq>
@@ -67,17 +67,14 @@
 
                         <td class="w50"><input type="checkbox" class="checkAll" rel="item_id" /></td>
                         <td class="w50">ID</td>
-                        <td>医院</td>
+                         <td>咨询人</td>
                         <td>咨询标题</td>
-                        <td>图片</td>
-                        <td>市场价格</td>
-                        <td>咨询价格</td>
-                        <td>售出数</td>
-                        <td>开始时间</td>
-                        <td>结束时间</td>
+						<td>内容</td>
+                        
+                        <td>回复次数</td>
                         <td>创建时间</td>
                         <td>创建IP</td>
-                        <td>是否审核</td>
+                     
                         <td>操作</td>
 
                     </tr>
@@ -85,25 +82,29 @@
                         <tr>
                             <td><input class="child_item_id" type="checkbox" name="item_id[]" value="<{$var.item_id}>" /> </td>
                             <td><{$var.item_id}></td>
-                            <td><{$hospitals[$var['hospital_id']]['hospital_name']}></td>
+                            <td><{$users[$var['user_id']]['account']}></td>
                             <td><{$var.title}></td>
-                            <td><img src="__ROOT__/attachs/<{$var.photo}>" class="w80" /></td>
-                            <td><{$var.price}></td>
-                            <td><{$var.item_price}></td>
-                            <td><{$var.sold_num}></td>
-                            <td><{$var.bg_date}></td>
-                            <td><{$var.end_date}></td>
+                          <!--   <td><img src="__ROOT__/attachs/<{$var.photo}>" class="w80" /></td> -->
+                            <td><{$var.details}></td>
+                            <td><{$var.item_times}></td>
+                           
                             <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
                             <td><{$var.create_ip_area}><{$var.create_ip}></td>
                             <!--<td><eq name="var.is_seckill" value="0">未开启<else/>正在秒杀</eq></td> -->
-                            <td><eq name="var.audit" value="0">等待审核<else/>正常</eq></td>
+                           <!--  <td><eq name="var.audit" value="0">等待审核<else/>正常</eq></td> -->
                         <td>
-                            <neq name="var.audit" value="0">
+                           <!--  <neq name="var.audit" value="0">
                             <{:BA('zhuanti/addgoods',array("goods_id"=>$var["item_id"]),'专题','','remberBtn')}>
-                            </neq>
+                            </neq> -->
+							
+							<label>
+                                <!--  <a   class="remberBtn" href="<{:U('item/reply',array('item_id'=>$var['item_id']))}>" mini="select" w="800" h="600" class="sumit">立即回复</a>   -->
+                                <a   class="remberBtn" href="<{:U('item/select',array('item_id'=>$var['item_id']))}>" mini="select" w="800" h="600" class="sumit">查看回复</a>  
+                            </label>
                             <{:BA('item/edit',array("item_id"=>$var["item_id"]),'编辑','','remberBtn')}>
                             <{:BA('item/delete',array("item_id"=>$var["item_id"]),'删除','act','remberBtn')}>
-                            <eq name="var.audit" value="0"> <{:BA('item/audit',array("item_id"=>$var["item_id"]),'审核','act','remberBtn')}> </eq>
+							
+                            <!-- <eq name="var.audit" value="0"> <{:BA('item/audit',array("item_id"=>$var["item_id"]),'审核','act','remberBtn')}> </eq> -->
                         </td>
                         </tr>
                     </volist>
