@@ -12,26 +12,27 @@ class ItemModel extends CommonModel {
     protected $tableName = 'item';
 
     public function _format($data) {
-        $data['save'] = round(($data['price'] - $data['item_price']) / 100, 2);
+        /* $data['save'] = round(($data['price'] - $data['item_price']) / 100, 2);
         $data['price'] = round($data['price'] / 100, 2);
         $data['item_price'] = round($data['item_price'] / 100, 2);
         $data['mobile_fan'] = round($data['mobile_fan'] / 100, 2);
         $data['settlement_price'] = round($data['settlement_price'] / 100, 2);
         $data['discount'] = round($data['item_price'] * 10 / $data['price'], 1);
-        return $data;
+      */  
+    	 return $data;
     }
 
     public function CallDataForMat($items) { //专门针对CALLDATA 标签处理的
         if (empty($items))
             return array();
-        $obj = D('Hospital');
+        $obj = D('Users');
         $hospital_ids = array();
         foreach ($items as $k => $val) {
-            $hospital_ids[$val['hospital_id']] = $val['hospital_id'];
+            $hospital_ids[$val['user_id']] = $val['user_id'];
         }
         $hospitals = $obj->itemsByIds($hospital_ids);
         foreach ($items as $k => $val) {
-            $val['hospital'] = $hospitals[$val['hospital_id']];
+            $val['user'] = $hospitals[$val['user_id']];
             $items[$k] = $val;
         }
         return $items;
