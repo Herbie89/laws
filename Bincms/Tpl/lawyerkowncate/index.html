@@ -41,11 +41,11 @@
                                 <{:BA('lawyerkowncate/delete',array("cate_id"=>$var["cate_id"]),'删除','act','remberBtn')}>
                             </td>
                         </tr>
-                        <foreach name="list" item="var2">
+                           <foreach name="list" item="var2">
                             <eq name="var2.parent_id" value="$var.cate_id">
                             <tr height="48px" style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
 
-                                <td >|----<{$var2.cate_name}>(<{$var2.cate_id}>)</td>
+                                <td  style="text-align:left;padding-left:20px;">|--<{$var2.cate_name}>(<{$var2.cate_id}>)</td>
                                 <td><input name="orderby[<{$var2.cate_id}>]" value="<{$var2.orderby}>" type="text" class="remberinput w80" /></td>
                                 <td > <{:BA('lawyerkowncate/create',array("parent_id"=>$var2["cate_id"]),'添加子分类','load','remberBtn',600,300)}>
                                     <eq name="var2.is_hot" value="0">
@@ -56,7 +56,7 @@
                                     <{:BA('lawyerkowncate/edit',array("cate_id"=>$var2["cate_id"]),'编辑','load','remberBtn',600,300)}>
                                     <{:BA('lawyerkowncate/delete',array("cate_id"=>$var2["cate_id"]),'删除','act','remberBtn')}>
                                 </td>
-                            </tr>
+                                </tr>
 							
 							
 							
@@ -65,9 +65,9 @@
                             <eq name="var3.parent_id" value="$var2.cate_id">
                             <tr height="48px" style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
 
-                                <td >|----|---<{$var3.cate_name}>(<{$var3.cate_id}>)</td>
+                                <td   style="text-align:left;padding-left:20px;">|----|<{$var3.cate_name}>(<{$var3.cate_id}>)</td>
                                 <td><input name="orderby[<{$var3.cate_id}>]" value="<{$var3.orderby}>" type="text" class="remberinput w80" /></td>
-                                <td >
+                                <td ><{:BA('lawyerkowncate/create',array("parent_id"=>$var3["cate_id"]),'添加子分类','load','remberBtn',600,300)}>
                                     <eq name="var3.is_hot" value="0">
                                     <{:BA('lawyerkowncate/hots',array("cate_id"=>$var3["cate_id"]),'设为热门','act','remberBtn')}>
                             <else />
@@ -77,17 +77,47 @@
                                     <{:BA('lawyerkowncate/delete',array("cate_id"=>$var3["cate_id"]),'删除','act','remberBtn')}>
                                 </td>
                             </tr>
+                              
+							           
+							   <foreach name="list" item="var4">
+                                <eq name="var4.parent_id" value="$var3.cate_id">
+							    
+								 <tr height="48px" style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
+
+                                <td style="text-align:left;padding-left:20px;">|----|---|---<{$var4.cate_name}>(<{$var4.cate_id}>)</td>
+                                <td><input name="orderby[<{$var4.cate_id}>]" value="<{$var4.orderby}>" type="text" class="remberinput w80" /></td>
+                                <td >
+                                    <eq name="var4.is_hot" value="0">
+                                    <{:BA('lawyerkowncate/hots',array("cate_id"=>$var4["cate_id"]),'设为热门','act','remberBtn')}>
+                            <else />
+                            <{:BA('lawyerkowncate/hots',array("cate_id"=>$var4["cate_id"]),'取消热门','act','remberBtn')}>
                             </eq>
-                        </foreach>
-							
-							
+                                    <{:BA('lawyerkowncate/edit',array("cate_id"=>$var4["cate_id"]),'编辑','load','remberBtn',600,300)}>
+                                    <{:BA('lawyerkowncate/delete',array("cate_id"=>$var4["cate_id"]),'删除','act','remberBtn')}>
+                                </td>
+                            </tr>
+								
+								
+								
+								
+								
+							  
+							      </eq>
+                                 </foreach>
+							  
+							  
+							  
                             </eq>
+                            </foreach>
 							
 							
 							
 							
 							
-                        </foreach>
+							
+							
+										</eq>	
+									</foreach>
                         </eq>
                     </foreach>
                 </table>
