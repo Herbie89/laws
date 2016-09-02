@@ -11,7 +11,7 @@
     <div class="jsglNr">
         <div class="selectNr" style="margin-top: 0px; border-top:none;">
             <div class="right">
-                <form class="search_form" method="post" action="<{:U('hospital/apply')}>">
+                <form class="search_form" method="post" action="<{:U('lawyer/apply')}>">
                     <div class="seleHidden" id="seleHidden">
                         <span>关键字(电话或律师名称)</span>
                         <input type="text" name="keyword" value="<{$keyword}>" class="inptText" /><input type="submit" value="   搜索"  class="inptButton" />
@@ -22,7 +22,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <form method="post" action="<{:U('hospital/apply')}>">
+        <form method="post" action="<{:U('lawyer/apply')}>">
             <div class="selectNr selectNr2">
                 <div class="left">
                     <div class="seleK">
@@ -101,7 +101,7 @@
         <div class="tableBox">
             <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
                 <tr>
-                    <td class="w50"><input type="checkbox" class="checkAll" rel="hospital_id" /></td>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="lawyer_id" /></td>
                     <td class="w50">ID</td>
                     <td>管理者(UID)</td>
                     <td>分类</td>
@@ -114,19 +114,19 @@
                 </tr>
                 <foreach name="list" item="var">
                     <tr>
-                        <td><input class="child_hospital_id" type="checkbox" name="hospital_id[]" value="<{$var.hospital_id}>" /></td>
-                        <td><{$var.hospital_id}></td>
+                        <td><input class="child_lawyer_id" type="checkbox" name="lawyer_id[]" value="<{$var.lawyer_id}>" /></td>
+                        <td><{$var.lawyer_id}></td>
                         <td><{$users[$var['user_id']]['account']}>(<{$var.user_id}>)</td>
                         <td><{$cates[$var['cate_id']]['cate_name']}></td>
                         <td><{$citys[$var['city_id']]['name']}>-<{$areas[$var['area_id']]['area_name']}>-<{$business[$var['business_id']]['business_name']}></td>
-                        <td><{$var.hospital_name}></td>
+                        <td><{$var.lawyer_name}></td>
                         <td><img src="__ROOT__/attachs/<{$var.logo}>" class="w80" /></td>
                         <td><{$var.tel}></td>
                         <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
                         <td>
-                            <{:BA('hospital/edit',array("hospital_id"=>$var["hospital_id"]),'编辑','','remberBtn')}>
-                            <{:BA('hospital/audit',array("hospital_id"=>$var["hospital_id"]),'审核','act','remberBtn')}>
-                            <{:BA('hospital/delete',array("hospital_id"=>$var["hospital_id"]),'删除','act','remberBtn')}>
+                            <{:BA('lawyer/edit',array("lawyer_id"=>$var["lawyer_id"]),'编辑','','remberBtn')}>
+                            <{:BA('lawyer/audit',array("lawyer_id"=>$var["lawyer_id"]),'审核','act','remberBtn')}>
+                            <{:BA('lawyer/delete',array("lawyer_id"=>$var["lawyer_id"]),'删除','act','remberBtn')}>
                         </td>
                     </tr>
                 </foreach>
@@ -135,8 +135,8 @@
         </div>
         <div class="selectNr" style="margin-bottom: 0px; border-bottom: none;">
             <div class="left">
-                <{:BA('hospital/audit','','批量审核','list',' remberBtn')}>
-                <{:BA('hospital/delete','','批量删除','list',' a2')}>
+                <{:BA('lawyer/audit','','批量审核','list',' remberBtn')}>
+                <{:BA('lawyer/delete','','批量删除','list',' a2')}>
             </div>
         </div>
     </form>
