@@ -33,7 +33,23 @@
                                         <foreach name="cates" item="var2">
                                             <eq name="var2.parent_id" value="$var.cate_id">
                                             <option value="<{$var2.cate_id}>"  <eq name="var2.cate_id" value="$cate_id">selected="selected"</eq> > &nbsp;&nbsp;<{$var2.cate_name}></option>
-                                            </eq>
+                                           
+                                                       <foreach name="cates" item="var3">
+                                                      <eq name="var3.parent_id" value="$var2.cate_id">
+                                                      <option value="<{$var3.cate_id}>"  <eq name="var3.cate_id" value="$cate_id">selected="selected"</eq> > &nbsp;&nbsp;&nbsp;&nbsp;<{$var3.cate_name}></option>
+                                           
+                                                                                <foreach name="cates" item="var4">
+                                                                        <eq name="var4.parent_id" value="$var3.cate_id">
+                                                                      <option value="<{$var3.cate_id}>"  <eq name="var4.cate_id" value="$cate_id">selected="selected"</eq> > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<{$var4.cate_name}></option>
+                                           
+                                                                        
+																		   </eq>
+																		   </foreach>
+
+                                                          </eq>
+                                                           </foreach>
+
+										   </eq>
                                         </foreach>
                                         </eq>
                                     </foreach>
