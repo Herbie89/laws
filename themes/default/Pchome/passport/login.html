@@ -1,66 +1,438 @@
-<include file="public:header" /> 
-<include file="public:topOne"/>
-	<div class="main">
-		<div class="loginBox">
-			<form id="login_frm"  action="<{:U('passport/login')}>" method="post" target="baocms_frm">
-				<div class="loginMid">
-				<h1>
-					<if condition="!empty($CONFIG['site']['logo'])"><a href="<{:U('index/index')}>"><img src="__ROOT__/attachs/<{$CONFIG.site.logo}>" /></a>
-						<else/>
-						<a href="<{:U('index/index')}>"><img src="__PUBLIC__/img/logo.png" /></a></if>
-				</h1>
-				<div class="loginMidNr">
-				<p class="loginMidP">欢迎登录<{$CONFIG['site']['sitename']}>！</p>
-				<table cellpadding="0" cellspacing="0" width="100%" class="loginTable">
-					<tr>
-						<td>
-							<input type="text" name="account" placeholder="邮箱/手机号"    class="loginInput" value="" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="password" name="password"  class="loginInput2" placeholder="密码" value="" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input  class="loginInput2 loginInput4" name="yzm"  type="text"  value="" placeholder="验证码" />
-							<img id="bao_img_code" src="__ROOT__/index.php?g=app&m=verify&a=index&mt=<{:time()}>" /><em><a rel="bao_img_code" class="yzm_code" href="javascript:void(0);">换一张</a></em></td>
-					</tr>
-					<tr>
-						<td class="agreen"><a href="<{:U('passport/forget')}>">忘记密码</a></td>
-					</tr>
-					<tr>
-						<input type="hidden" name="backurl" value="<{$backurl}>" />
-						<td>
-							<input type="submit" class="loginBtn" value="登 陆" />
-						</td>
-					</tr>
-					<tr>
-						<td><a href="<{:U('passport/register')}>" class="loginBtn loginBtnA">注 册</a></td>
-					</tr>
-				</table>
-			</form>
-			<ul class="qqlink">
-				<li class="qqlink_wz">其他账号登录：</li>
-				<li><a href="<{:U('passport/qqlogin')}>"></a></li>
-				<li class="li2"><a href="<{:U('passport/wxlogin')}>"></a></li>
-				<li class="li3"><a href="<{:U('passport/wblogin')}>"></a></li>
-			</ul>
-		</div>
+
+<include file="public:topTwo" /> <!-- -头部声明文件-- -->
+<include file="public:navTwo" /> <!-- -头部声明文件-- -->
+<div id="sysmsg">
+
+	<div id="scrollobj" onmouseover="javascript:_stop();"
+
+		onmouseout="javascript:_start();"></div>
+
+	<div style="float: right; padding-right: 5px;">
+
+		<a href="javascript:void(0)" onclick="closemsg()"
+
+			style="line-height: 25px; font-size: 20px; color: white;"
+
+			title="关闭公告">×</a>
+
 	</div>
-	<div class="loginR"> <img src="__PUBLIC__/img/r_03.png" />
-		<div class="login_wx">
-			<ul>
-				<li class="login_wxLi"> <img src="__PUBLIC__/img/bwx_03.png" />
-					<p>扫描下载客户端</p>
-				</li>
-				<li class="login_wxLi"> <img src="__PUBLIC__/img/bwx_03.png" />
-					<p>扫描关注官网微信</p>
-				</li>
-			</ul>
-		</div>
-	</div>
+
 </div>
+
+
+
+<div class="container-fulid fff" style="z-index: 5"></div>
+
+<style>
+
+.xfmain {
+
+	position: fixed;
+
+	bottom: 20px;
+
+	right: 0px;
+
+	border: #CCCCCC solid 1px;
+
+	z-index: 200;
+
+	background-color: #E8E8E8
+
+}
+
+
+
+.dvqq {
+
+	margin: 10px 10px 10px 10px;
+
+	text-align: center;
+
+	cursor: pointer
+
+}
+
+
+
+.dvimg {
+
+	margin-bottom: 5px
+
+}
+
+
+
+.dvother {
+
+	margin: 10px 10px 10px 10px;
+
+	text-align: center;
+
+	cursor: pointer
+
+}
+
+
+
+.spwz {
+
+	color: #666666;
+
+	font-size: 11px;
+
+	font-family: '黑体'
+
+}
+
+
+
+.encodeimg {
+
+	position: fixed;
+
+	bottom: 110px;
+
+	right: 66px;
+
+	display: none;
+
+	z-index: 200
+
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="zhuce">
+
+				<!-- 会员登录 -->
+
+				<div class="denglu" style="padding-left:50px;">
+
+					<div id="loginTitle" style="border-top-left-radius:6px;border-top-right-radius:6px;height: 30px;">
+
+						<h4 style="line-height: 25px">会员登录</h4>
+
+					</div>
+
+					<!-- <hr> -->
+
+					<form id="loginForm" method="post" style="border:1px solid #ececec;height:400px;width:500px;padding-top:100px">
+
+						<table>
+
+							<tr>
+
+								<td width="150" align="right">账号：</td>
+
+								<td>
+
+									<input type="text" class="form-control" placeholder="请输入你的账号" 
+
+										name="username" id="loginName" onblur="checkLoginName()" style="display: inline;" />
+
+									<span id="msgLoginNameError" style="color: red"></span>
+
+								</td>
+
+							</tr>
+                         
+							<tr>
+
+								<td width="150" align="right">密码：</td>
+
+								<td>
+
+									<input type="password" class="form-control" placeholder="6-16位登录密码" 
+
+										name="password" id="password" onblur="checkPassword()" style="display: inline;" autocomplete="off"/>
+
+									<span id="msgLoginPwdError" style="color: red"></span>
+
+								</td>
+
+							</tr>
+
+							<tr class="yzm" style="display:block" id="loginyzm">
+
+								<td width="150" align="right">验证码：</td>
+
+								<td>
+
+									<input  type="text" class="form-control" style="width:80px;display: inline;" placeholder="验证码" maxlength="4" onblur="checkLoginJavaCode()" id="loginJavaCode"/>
+
+									<span style="padding-left:10px"><img src="__ROOT__/index.php?g=app&m=verify&a=index&mt=<{:time()}>" id="imgLoginJavaCode" onclick="reloadLogincode()" style="cursor: pointer;" title="看不清楚,换一张"></span>
+
+									<span id="msgLoginJavaCode" style="color: red"></span>
+
+								</td>
+
+							</tr>
+
+							<tr>
+
+								<td width="150" align="right"></td>
+
+								<td style="text-align:right" width="220">
+
+									<a href="../user/retrievepassword.jsp">忘记密码？</a>
+
+								</td>
+
+							</tr>
+
+							<tr>
+
+								<td width="150" align="right"></td>
+
+								<td><input type="button" value="登录" class="denglu1" onclick="login()"/></td>
+
+							</tr>
+
+						</table>
+
+					</form>
+
+				</div>
+
+				<!-- 会员注册 -->
+
+				<div class="zhuce1">
+
+					<div id="shouji" onclick="phoneTable()" style="border-top-left-radius:6px;border-top-right-radius:6px;height: 30px;">
+
+						<h4 style="line-height: 25px">客户注册</h4>
+
+					</div>
+
+					<div id="putong" onclick="commonTable()" style="border-top-left-radius:6px;border-top-right-radius:6px;height: 30px;">
+
+						<h4 style="line-height: 25px">律师注册</h4>
+
+					</div>
+
+					<!-- <hr style="clear: both;margin-top:50px;"> -->
+
+					<!-- 手机注册 -->
+
+					<div id="phoneTable" style="height:400px;width:500px;padding-top:70px;margin-top:29px; border:solid #ececec 1px;">
+
+						<form id="mobileFormRegist" method="post">
+
+							<table>
+
+								<tbody>
+
+									<tr>
+
+										<td width="90" align="right">账号：</td>
+
+										<td width="400">
+
+											<input type="text" class="form-control" placeholder="请输入您的账号" 
+
+												id="regPhone" name="phone" maxlength="11" style="width:215px;"/>
+
+											<span id="msgRegPhone" style="color: red"></span>
+
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td width="90" align="right">电话：</td>
+
+										<td width="400">
+
+											<input type="text" class="form-control" placeholder="请输入您的电话" 
+
+												 id="regPhone" name="phone" maxlength="11" style="width:215px;"/>
+
+											<span id="msgRegPhone" style="color: red">请输入你的电话</span>
+
+										</td>
+
+									</tr>
+
+									
+									<tr>
+
+										<td width="90" align="right">密码：</td>
+
+										<td>
+
+											<input type="password" class="form-control" placeholder="6-16位数字字母组合密码" maxlength="16" 
+
+												id="regPhonePwd" onblur="checkRegPhonePwd()" name="password" autocomplete="off"/>
+
+											<span id="msgRegPhonePwd" style="color: red"></span>
+
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td width="90" align="right">确认密码：</td>
+
+										<td><input type="password" class="form-control" placeholder="与密码相同" maxlength="16"
+
+												id="regPhoneRePwd" onblur="checkRegPhoneRePwd()" name="repassword" autocomplete="off"/>
+
+											<span id="msgRegPhoneRePwd" style="color: red"></span>
+
+										</td>
+
+									</tr>
+                                    <tr>
+
+										<td width="50" align="right">省：</td>
+
+										<td width="460">
+
+										<!--	<input type="text" class="form-control" placeholder="请输入您的地址" 
+
+												 id="regPhone" name="address" maxlength="11" style="width:215px;"/>
+
+											<span id="msgRegPhone" style="color: red"></span>                                        
+-->
+<div style="font: left"> 
+                    <select id="seachprov" name="seachprov" class="form-control" style="width:100px;    font-family: 微软雅黑;display: inline-block;" onchange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"><option value="13">河南省</option>
+					<option value="13">其它</option></select>&nbsp;&nbsp;
+
+                    &nbsp;&nbsp;市：
+                    <select id="seachcity" name="homecity" class="form-control" style="width:100px;    font-family: 微软雅黑;display: inline-block;" onchange="changeCity(this.value,'seachdistrict','seachdistrict');"><option value="4101">郑州市</option><option value="4102">开封市</option><option value="4103">洛阳市</option><option value="4104">平顶山市</option><option value="4105">安阳市</option><option value="4106">鹤壁市</option><option value="4107">新乡市</option><option value="4108">焦作市</option><option value="4109">濮阳市</option><option value="4110">许昌市</option><option value="4111">漯河市</option><option value="4112">三门峡市</option><option value="4113">南阳市</option><option value="4114">商丘市</option><option value="4115">信阳市</option><option value="4116">周口市</option><option value="4117">驻马店市</option><option value="4118">济源市</option></select>&nbsp;&nbsp;
+
+                    &nbsp;
+                    &nbsp;区县：
+                   <span id="seachdistrict_div"><select class="form-control" style="width:100px;    font-family: 微软雅黑;display: inline-block;" id="seachdistrict" name="seachdistrict" onchange="changeShi(this.value)"><option value="0">请选择</option><option value="410102">中原区</option><option value="410103">二七区</option><option value="410104">管城</option><option value="410105">金水区</option><option value="410106">上街区</option><option value="410108">惠济区</option><option value="410109">高新区</option><option value="410122">中牟县</option><option value="410181">巩义市</option><option value="410182">荥阳市</option><option value="410183">新密市</option><option value="410184">新郑市</option><option value="410185">登封市</option></select></span>
 </div>
+
+   
+                  
+
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td width="90" align="right"></td>
+
+										<td><input type="button" value="注册" class="tijiao" onclick="clickPhoneReg()"/></td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+
+						</form>
+
+					</div>
+
+					<!-- 普通注册 -->
+
+					<div id="commonTable" style="display: none;height:400px;width:500px;padding-top:60px;margin-top:29px; border:solid #ececec 1px;">
+
+						<form id="commonFormRegist" method="post">
+
+							<table>
+
+								<tbody>
+
+									<tr>
+
+										<td width="90" align="right">用户名：</td>
+
+										<td>
+
+											<input type="text" class="form-control" placeholder="以字母开头4-16位字符" maxlength="16"
+
+												id="regName" name="username" onkeyup="checkRegUsername()"/>
+
+											<span id="msgCommonRegUsername" style="color: red"></span>
+
+										</td>
+
+									</tr>
+
+								
+									<tr>
+
+										<td width="90" align="right">密码：</td>
+
+										<td>
+
+											<input type="password" class="form-control" placeholder="6-16位数字字母组合密码" maxlength="16"
+
+												onblur="checkCommonRegPwd()" id="commonRegPwd" name="password" autocomplete="off"/>
+
+											<span id="msgCommonRegPwd" style="color: red"></span>
+
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td width="90" align="right">确认密码：</td>
+
+										<td><input type="password" class="form-control" placeholder="与密码相同" maxlength="16"
+
+												onblur="checkCommonRegRepwd()" id="commonRegRepwd" autocomplete="off"/>
+
+											<span id="msgCommonRegRepwd" style="color: red"></span>
+
+										</td>
+
+									</tr>
+
+								
+									<tr>
+
+										<td width="90" align="right"></td>
+
+										<td><input type="button" value="注册" class="tijiao" onclick="clickCommonReg()"/></td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+
+						</form>
+
+					</div>
+
+				</div>
+
+			</div>
+  <!--结束-->
+ <!--广告--> 
+  <div class="gg0">
+    <div class="gg"><img src="__TMPL__statics/images/gg1.jpg" width="1200" height="90"/></div>
+  </div>
+ <!--广告-->  
+  <!--foot-->
+<br/>
+ <script> var BAO_PUBLIC = '__PUBLIC__'; var BAO_ROOT = '__ROOT__';</script>
+<script>
+  var
+ $(document).on('click', '.yzm_code', function () {
+        $("#" + $(this).attr('rel')).attr('src', BAO_ROOT + '/index.php?g=app&m=verify&a=index&mt=' + Math.random());
+    });
+	
+</script>	
 <include file="public:footer"/> 
