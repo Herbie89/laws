@@ -5,7 +5,7 @@ var errorCount = 0;
 //点击更换登录验证码
 function reloadLogincode(){
     var verify=document.getElementById('imgLoginJavaCode');
-    verify.setAttribute('src','../static/createCode/makeLoginCertPic.jsp?it='+Math.random());
+    verify.setAttribute('src',BAO_ROOT + '/index.php?g=app&m=verify&a=index&mt=' + Math.random());
 }
 
 //用户登录
