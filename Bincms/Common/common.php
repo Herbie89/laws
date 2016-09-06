@@ -489,7 +489,7 @@ function isDate($string) {
  * @return boolean
  */
 function isPhone($string) {
-    if (preg_match('/^[0,4]\d{2,3}-\d{7,8}$/', $string))
+    if (preg_match('/^[0,4]\d{2,3}-\d{6,8}$/', $string))
         return true;
     return false;
 }
