@@ -10,12 +10,12 @@
 
 class PassportAction extends CommonAction {
 
-    private $create_fields = array('account', 'password', 'nickname');
+    private $create_fields = array('account', 'password', 'nickname','tel');
 
     public function register() {
         if ($this->isPost()) {
             if (isMobile(htmlspecialchars($_POST['account']))) {
-                if (!$scode = trim($_POST['scode'])) {
+               /*  if (!$scode = trim($_POST['scode'])) {
                     $this->baoError('请输入短信验证码！');
                 }
                 $scode2 = session('scode');
@@ -24,35 +24,189 @@ class PassportAction extends CommonAction {
                 }
                 if ($scode != $scode2) {
                     $this->baoError('请输入正确的短信验证码！');
-                }
+                } */
             } else {
-                $yzm = $this->_post('yzm');
+              /*   $yzm = $this->_post('yzm');
                 if (strtolower($yzm) != strtolower(session('verify'))) {
                     session('verify', null);
                     $this->baoError('验证码不正确!', 2000, true);
-                }
+                } */
             }
             $data = $this->createCheck();
-            $is_agree = $this->_post('is_agree');
+           /*  $is_agree = $this->_post('is_agree');
             if (!$is_agree) {
                 $this->baoError('请同意注册条约!', 2000, true);
-            }
-            $password2 = $this->_post('password2');
+            } */
+            $password2 = $this->_post('repassword');
             if ($password2 !== $data['password']) {
-                session('verify', null);
-                $this->baoError('两次密码不一致', 3000, true);
+            	$datas=6;
+            	$this->ajaxReturn($datas);
+                //session('verify', null);
+               // $this->baoError('两次密码不一致', 3000, true);
             }
             //开始其他的判断了
-            if (D('Passport')->register($data)) {
+            $data['password']=md5( $data['password']);
+        if($res=D('Users')->add($data)){
+        	
+        	$datas=1;
+        	setUid($res['user_id']);
+        	$this->member=$res;
+        	$this->ajaxReturn($datas);
+        	
+        	
+        	
+        }else{
+        	
+        	$datas=7;
+        	$this->ajaxReturn($datas);
+        	
+        	
+        	
+        }
+            
+            
+           /*  if (D('Passport')->register($data)) {
                 
                 $this->baoSuccess('恭喜您，注册成功！', U('index/index'));
-            }
-            $this->baoError(D('Passport')->getError(), 3000, true);
+            } */
+           // $this->baoError(D('Passport')->getError(), 3000, true);
         } else {
             $this->display();
         }
     }
    
+    //验证用户注册
+    private function createCheck() {
+    	$data = $this->checkFields($this->_post('data', false), $this->create_fields);
+    	$data['account'] = htmlspecialchars($_POST['account']);
+    	$data['password'] = htmlspecialchars($_POST['password']);
+    	$data['tel'] = $_POST['tel'];
+    	if (!isMobile($data['account']) && !isEmail($data['account'])) {
+    		// session('verify', null);
+    		//$this->baoError('用户名只允许手机号码或者邮件!', 2000, true);
+    		$datas=3;
+    		$this->ajaxReturn($datas);
+    		 
+    	}
+    	$data['password'] = htmlspecialchars($data['password']); //整合UC的时候需要
+    	if (empty($data['password']) || strlen($data['password']) < 6) {
+    		// session('verify', null);
+    		// $this->baoError('请输入正确的密码!密码长度必须要在6个字符以上', 2000, true);
+    
+    		$datas=5;
+    		$this->ajaxReturn($datas);
+    
+    	}
+    	//验证电话
+    	if(!isPhone($data['tel'])){
+    		$datas=4;
+    		$this->ajaxReturn($datas);
+    		 
+    	}
+    
+    	$data['nickname'] = $data['account'];
+    	if (isEmail($data['account'])) { //如果邮件的@前面超过15就不好了
+    		$local = explode('@', $data['account']);
+    		$data['ext0'] = $local[0];
+    	} else {
+    		$data['mobile'] = $data['account']; //绑定手机号
+    		// $data['ext0'] = $data['account']; //兼容UCENTER
+    	}
+    	$data['province'] = $_POST['seachprov']?$_POST['seachprov']:'';
+    	$data['city'] = $_POST['homecity']?$_POST['homecity']:'';
+    	$data['tomwn'] = $_POST['seachdistrict']?$_POST['seachdistrict']:'';
+    	$data['reg_ip'] = get_client_ip();
+    	$data['reg_time'] = NOW_TIME;
+    	return $data;
+    }
+    
+    public function check() {
+    	$account=$this->_post('account');
+    	$res=D('Users')->where()->find();
+    	if($res){
+    		$datas=1;
+    		$this->ajaxReturn($datas);
+    		
+    		
+    		
+    	}else{
+    		
+    		$datas='';
+    		$this->ajaxReturn($datas);
+    		
+    	}
+    	
+    	
+    	
+    }
+    
+    //注册律师端
+  public function  registerlawyer(){
+  	    $data['laccount']=htmlspecialchars($this->_post('username'));
+  	  if(strlen( $data['laccount'])<4&&strlen($data['laccount'])>16){
+  	  	$datas=3;
+  	  	$this->ajaxreturn($datas);
+  	  	
+  	  	
+  	  }
+  	
+  	 $data['lpassword'] = htmlspecialchars($this->_post('password')); //整合UC的时候需要
+  	 if (empty($data['lpassword']) || strlen($data['lpassword']) < 6) {
+  	 	// session('verify', null);
+  	 	// $this->baoError('请输入正确的密码!密码长度必须要在6个字符以上', 2000, true);
+  	 
+  	 	$datas=5;
+  	 	$this->ajaxReturn($datas);
+  	 
+  	 } 
+  	 
+  	 
+  	 
+  	  $password2 = $this->_post('repassword');
+  	  if ($password2 !== $data['lpassword']) {
+  	  	$datas=6;
+  	  	$this->ajaxReturn($datas);
+  	  	//session('verify', null);
+  	  	// $this->baoError('两次密码不一致', 3000, true);
+  	  }
+  	  //开始其他的判断了
+  	  $data['lpassword']=md5( $data['lpassword']);
+  	  $data['reg_ip'] = get_client_ip();
+  	  $data['reg_time'] = NOW_TIME;
+  	  
+  	  
+  	  
+  	  
+  	 $lawyers=D('lawyer')->add( $data);
+  	if($lawyers){
+  		
+  		$datas=1;
+  		//session 保存用户信息
+  		setUid($lawyers['lawyer_id']);
+  		$this->lawyer=$lawyers;
+  		//用户类型
+  		$this->utype=2;
+  		$this->ajaxReturn($datas);
+  		
+  		
+  	}else{
+  		
+  		$datas=2;
+  		$this->ajaxReturn($datas);
+  		
+  		
+  		
+  	}
+  	
+  	
+  }
+    
+    
+    
+    
+    
+    
+    
     public function sendsms() {
         if (!$mobile = htmlspecialchars($_POST['mobile'])) {
             die('请输入正确的手机号码');
@@ -82,28 +236,96 @@ class PassportAction extends CommonAction {
     }
 
     public function login() {
+    	
+    	
         if ($this->isPost()) {
-            $yzm = $this->_post('yzm');
-            if (strtolower($yzm) != strtolower(session('verify'))) {
-                session('verify', null);
-                $this->baoError('验证码不正确!', 2000, true);
-            }
-            $account = $this->_post('account');
+           // $yzm = $this->_post('yzm');
+          //  if (strtolower($yzm) != strtolower(session('verify'))) {
+               // session('verify', null);
+               // $this->baoError('验证码不正确!', 2000, true);
+               
+               // $data=1;
+              //  $this->ajaxReturn($data);
+                
+           // }
+            //判断账号是否存在
+            $account = $this->_post('username');
             if (empty($account)) {
-                session('verify', null);
-                $this->baoError('请输入用户名!', 2000, true);
+            	$data=2;
+            	$this->ajaxReturn($data);
+            	
             }
-
+           //判断密码是否存在
             $password = $this->_post('password');
             if (empty($password)) {
-                session('verify', null);
-                $this->baoError('请输入登录密码!', 2000, true);
+                 $data=2;
+            	$this->ajaxReturn($data);
             }
-           // $backurl = $this->_post('backurl', 'htmlspecialchars');
-          //  if (empty($backurl))
-                
-			    
-            if (true == D('Passport')->login($account, $password)) {
+            //判断用户类型
+            $utype=(int)$this->_post('utype');
+         if (empty($utype)) {
+                 $data=2;
+            	$this->ajaxReturn($data);
+            }
+            
+            //1 表示会员
+			if($utype==1){
+				$user=D('Users')->where(array('account'=>$account))->find();
+				if($user){
+			        if($user['password']==md5($password)){
+					$data=1;
+					setUid($user['user_id']);
+					$this->member=$user;
+					$this->ajaxReturn($data);
+					
+			        }else{
+			        	
+			        	$data=5;
+			           $this->ajaxReturn($data);
+			        	
+			        }
+					
+				}else{
+					//用户不存在
+					$data=4;
+					$this->ajaxReturn($data);
+					
+				}
+				
+				
+			}   
+
+			//2 表示律师中心
+			if($utype==2){
+				$lawyer=D('Lawyer')->where(array('laccount'=>$account))->find();
+				if($lawyer){
+					
+					//验证密码
+						if($lawyer['lpassword']==md5( $password)){
+							$data=3;
+							setUid($lawyer['lawyer_id']);
+							$this->utype=2;
+							$this->lawyer=$lawyer;
+							$this->ajaxReturn($data);
+						}else{
+							//密码错误	
+							$data=5;
+							$this->ajaxReturn($data);						
+						}
+
+				}else{
+					//用户不存在
+					$data=4;
+					$this->ajaxReturn($data);
+					
+				}
+			
+			
+			}
+				
+			
+			
+           /*  if (true == D('Passport')->login($account, $password)) {
 				
 				$users= D('Passport')->getUserInfo();
 				//P($users);
@@ -126,15 +348,15 @@ class PassportAction extends CommonAction {
             $this->baoError(D('Passport')->getError(), 3000, true);
         
         
-            }
+            } */
         
           } else {
-            if (!empty($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) && !strstr($_SERVER['HTTP_REFERER'], 'passport')) {
+           /*  if (!empty($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) && !strstr($_SERVER['HTTP_REFERER'], 'passport')) {
                 $backurl = $_SERVER['HTTP_REFERER'];
             } else {
                 $backurl = U('member/index');
-            }
-            $this->assign('backurl', $backurl);
+            } */
+          // $this->assign('backurl', $backurl);
             $this->display();
         }
     }
@@ -202,10 +424,7 @@ class PassportAction extends CommonAction {
         }
     }
 
-    public function check() {
-
-        $this->display();
-    }
+   
 
     public function ajaxloging() {
 
@@ -217,31 +436,7 @@ class PassportAction extends CommonAction {
     }
 
 
-    private function createCheck() {
-        $data = $this->checkFields($this->_post('data', false), $this->create_fields);
-        $data['account'] = htmlspecialchars($_POST['account']);
-        if (!isMobile($data['account']) && !isEmail($data['account'])) {
-            session('verify', null);
-            $this->baoError('用户名只允许手机号码或者邮件!', 2000, true);
-        }
-        $data['password'] = htmlspecialchars($data['password']); //整合UC的时候需要
-        if (empty($data['password']) || strlen($data['password']) < 6) {
-            session('verify', null);
-            $this->baoError('请输入正确的密码!密码长度必须要在6个字符以上', 2000, true);
-        }
-        $data['nickname'] = $data['account'];
-        if (isEmail($data['account'])) { //如果邮件的@前面超过15就不好了
-            $local = explode('@', $data['account']);
-            $data['ext0'] = $local[0];
-        } else {
-            $data['mobile'] = $data['account']; //绑定手机号
-            $data['ext0'] = $data['account']; //兼容UCENTER
-        }
-        
-        $data['reg_ip'] = get_client_ip();
-        $data['reg_time'] = NOW_TIME;
-        return $data;
-    }
+    
 
     //两种找回密码的方式 1个是通过邮件 //填写了2个就改密码相对来说是不太合理，但是毕竟逻辑和操作相对简单一些！
     public function forget() {
