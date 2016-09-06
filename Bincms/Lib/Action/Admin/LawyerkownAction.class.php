@@ -97,7 +97,6 @@ class LawyerkownAction extends CommonAction { //按逻辑  instructions  和  de
             $this->baoError('法识名称不能为空');
         }
         $data['intro'] = htmlspecialchars($data['intro']);
-    
         $data['photo'] = htmlspecialchars($data['photo']);
         if (empty($data['photo'])) {
             $this->baoError('请上传图片');
@@ -105,7 +104,6 @@ class LawyerkownAction extends CommonAction { //按逻辑  instructions  和  de
         if (!isImage($data['photo'])) {
             $this->baoError('图片格式不正确');
         }
-       
         $data['is_hot'] = (int) $data['is_hot'];
         $data['is_new'] = (int) $data['is_new'];
         $data['is_chose'] = (int) $data['is_chose'];

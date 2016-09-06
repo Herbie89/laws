@@ -47,6 +47,7 @@ class LawyerAction extends CommonAction {
         $this->assign('cates', D('Lawyercate')->fetchAll());
       //  $this->assign('business', D('Business')->fetchAll());
         $this->assign('list', $list); // 赋值数据集
+       // var_dump($list);
         $this->assign('page', $show); // 赋值分页输出
         $this->display(); // 输出模板
     }
