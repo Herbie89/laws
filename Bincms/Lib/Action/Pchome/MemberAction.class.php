@@ -14,8 +14,8 @@ class MemberAction extends CommonAction { //用户中心
             header("Location: " . U('passport/login'));
             die;
         }
-        $this->assign('uid', $this->uid);
-        $this->assign('ranks', D('Userrank')->fetchAll());
+       // $this->assign('uid', $this->uid);
+        //$this->assign('ranks', D('Userrank')->fetchAll());
     }
 
     public function error($message = '', $jumpUrl = '', $ajax = false) {
@@ -1367,7 +1367,7 @@ class MemberAction extends CommonAction { //用户中心
     }
 
     public function index() {
-        $this->assign('menus', $this->getMenus());
+       // $this->assign('menus', $this->getMenus());
         $this->display();
     }
 

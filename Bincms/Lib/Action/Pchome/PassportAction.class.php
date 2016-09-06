@@ -50,7 +50,9 @@ class PassportAction extends CommonAction {
         	
         	$datas=1;
         	setUid($res['user_id']);
-        	$this->member=$res;
+        	//$this->member=$res;
+        	$utype=1;
+        	session('utype',$utype);
         	$this->ajaxReturn($datas);
         	
         	
@@ -185,7 +187,8 @@ class PassportAction extends CommonAction {
   		setUid($lawyers['lawyer_id']);
   		$this->lawyer=$lawyers;
   		//用户类型
-  		$this->utype=2;
+  		//$this->utype=2;
+  		$_SESSION('utype',2,3600);
   		$this->ajaxReturn($datas);
   		
   		
@@ -275,7 +278,8 @@ class PassportAction extends CommonAction {
 			        if($user['password']==md5($password)){
 					$data=1;
 					setUid($user['user_id']);
-					$this->member=$user;
+					$utype=1;
+        	        session('utype',$utype);
 					$this->ajaxReturn($data);
 					
 			        }else{
@@ -304,8 +308,8 @@ class PassportAction extends CommonAction {
 						if($lawyer['lpassword']==md5( $password)){
 							$data=3;
 							setUid($lawyer['lawyer_id']);
-							$this->utype=2;
-							$this->lawyer=$lawyer;
+							$utype=2;
+        	              session('utype',$utype);
 							$this->ajaxReturn($data);
 						}else{
 							//密码错误	

@@ -18,6 +18,27 @@ class LawyercenterAction extends CommonAction { //用户中心
         //$this->assign('ranks', D('Userrank')->fetchAll());
     }
 
+    
+    public function index() {
+    
+    	//判断用户类型是否是律师
+  
+    	if(session('utype')!=2){
+    		header("Location: " . U('passport/login'));
+    		
+    	}
+    	//dump($this->uid);
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	$this->display();
+    }
+    
+    
+    
     public function error($message = '', $jumpUrl = '', $ajax = false) {
         $this->assign('message', $message);
         $this->assign('jumpUrl', $jumpUrl);
@@ -1366,10 +1387,7 @@ class LawyercenterAction extends CommonAction { //用户中心
         }
     }
 
-    public function index() {
-       // $this->assign('menus', $this->getMenus());
-        $this->display();
-    }
+   
 
     public function shoplist() {
         $Shop = D('Shop');
