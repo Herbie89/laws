@@ -23,13 +23,13 @@ function login(){
 		}
 	}
 	$.ajax({  
-		url:"<{:U('passport/login'}>",
+		url:"login",
 		type:"post",
 		data:$("#loginForm").serialize(),
 		dataType:"json",
 		success:function(arr){ 
-			if(arr=="1"){
-				location.href="<{:U('member/index')}>"
+			if(arr=="1"){             alert(arr);
+				location.href="/index.php?m=member&a=index";
 			}else if(arr=='2'){
 				alert("用户名或密码输入不正确");
 				errorCount++;
