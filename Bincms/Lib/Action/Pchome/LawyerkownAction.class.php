@@ -21,7 +21,6 @@ class LawyerkownAction extends CommonAction {
         //左边分类
         $lawyerkowncate=D('Lawyerkowncate');
         $lawyerkowncatearr=$lawyerkowncate->limit(0,4)->select();
-
         foreach($lawyerkowncatearr as $k=>$v){
             $lawyerkowncatearr[$k]['chiled']=$lawyerkowncate->where("parent_id='{$v['cate_id']}'")->limit(0,6)->select();
         }
@@ -32,8 +31,12 @@ class LawyerkownAction extends CommonAction {
             $lawyerkowncatearrr[$k]['chiled']=$lawyerkowncate->where("parent_id='{$v['cate_id']}'")->select();
         }
         $this->assign('lawyerkowncatearrr',$lawyerkowncatearrr);
-        $lawyerkowncatearrtest=$lawyerkowncate->select();
-        $this->assign("lawyerkowncatearrtest",$lawyerkowncatearrtest);
+        $hyjtarr=$lawyerkowncate->where("parent_id=9")->limit(0,5)->select();
+        foreach($hyjtarr as $k=>$v){
+            $hyjtarr[$k]['chiled']=$lawyerkowncate->where("parent_id='{$v['cate_id']}'")->limit(0,5)->select();
+        }
+        $this->assign("hyjtarr",$hyjtarr);
+        //var_dump($lawyerkowncatearrtest);exit();
         /*$lawyerkowncate=D('Lawyerkowncate');
         $lawyerkowncatearr=$lawyerkowncate->limit()->select();
         $this->assign("lawyerkowncatearr",$lawyerkowncatearr);*/
