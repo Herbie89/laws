@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>律师个人资料完善页面</title>
+<link rel="stylesheet" href="__TMPL__statics/css/style_new.css" type="text/css" />
+<link type="text/css" href="__TMPL__statics/css/geren.css" rel="stylesheet" />
+<!--地区选择-->
+<script src="__TMPL__statics/js/jquery.min.js"></script>
+	<script src="__TMPL__statics/js/distpicker.data.js"></script>
+	  <script src="__TMPL__statics/js/distpicker.js"></script>
+<!--地区选择-->
+
+</head>
+
+<body>
+
+<include file="public:topTwo" /> <!-- -头部声明文件-- -->
+<include file="public:navTwo" /> <!-- -头部声明文件-- -->
+
+<!--center-->
+<div class="xx0">
+  <div class="xx">
+   <include file="left" />
+    <!--right-->
+	
+	 <script src="<{:U('app/datas/cityarea')}>"></script>
+                <script>
+                    var city_id = <?php echo (int)$LAWYER['province_id'];?>;
+                    var area_id = <?php echo (int)$LAWYER['city_id'];?>;
+					var town_id = <?php echo (int)$LAWYER['town_id'];?>;
+                    function changeCity(cid){
+                        var area_str = '<option value="" data-code="">—— 市 ——</option>';
+						//alert(JSON.stringify(cityareas.area));
+						//alert(cid);
+                        for(a in cityareas.area){
+						
+						//alert(JSON.stringify(cityareas.area[a]));
+						
+                           if(cityareas.area[a].parent_id ==cid){
+                                if(area_id == cityareas.area[a].region_id){
+                                    area_str += '<option selected="selected" value="'+cityareas.area[a].region_id+'">'+cityareas.area[a].region_name+'</option>';
+                                }else{
+                                     area_str += '<option value="'+cityareas.area[a].region_id+'">'+cityareas.area[a].region_name+'</option>';
+                                }  
+                            }
+                        }
+                        $("#area_id").html(area_str);
+                    }
+					
+					
+					
+					 function changeTown(mid){
+                        var area_str = '<option value="" data-code="">—— 区 ——</option>';
+						//alert(JSON.stringify(cityareas.area));
+						//alert(cid);
+						
+						//alert(JSON.stringify(cityareas.town));
+                        for(a in cityareas.town){
+						
+						
+						
+                           if(cityareas.town[a].parent_id ==mid){
+                                if(town_id == cityareas.town[a].region_id){
+                                    area_str += '<option selected="selected" value="'+cityareas.town[a].region_id+'">'+cityareas.town[a].region_name+'</option>';
+                                }else{
+                                     area_str += '<option value="'+cityareas.town[a].region_id+'">'+cityareas.town[a].region_name+'</option>';
+                                }  
+                            }
+                        }
+                        $("#business_id").html(area_str);
+                    }
+					
+					
+                    $(document).ready(function(){
+                        var city_str = '<option value="" data-code="">—— 省 ——</option>';
+						
+						//alert(JSON.stringify(cityareas));
+						
+                        for(a in cityareas.city){
+                           if(city_id == cityareas.city[a].region_id){
+                               city_str += '<option selected="selected" value="'+cityareas.city[a].region_id+'">'+cityareas.city[a].region_name+'</option>';
+                           }else{
+                                city_str += '<option value="'+cityareas.city[a].region_id+'">'+cityareas.city[a].region_name+'</option>';
+                           }  
+                        }
+                        $("#city_id").html(city_str);
+                        if(city_id){
+                            changeCity(city_id);
+                        }
+                        $("#city_id").change(function(){
+                            city_id = $(this).val();
+							//alert( city_id);
+                            changeCity($(this).val());
+                        });
+                        if(area_id){
+						 changeTown(area_id);
+						
+						
+						}
+						 $("#area_id").change(function(){
+                            area_id = $(this).val();
+							//alert( city_id);
+                            changeTown($(this).val());
+                        });
+						
+						
+						
+						
+						
+						
+						
+						
+                 
+                    });
+                </script>
+    <div class="xx_right">
+     <div class="xx_right_3">
+      <ul>
+      <li>用&nbsp;&nbsp;户&nbsp;&nbsp;名：<{$LAWYER.laccount}></li>
+       <li><div style="width:80px; float:left;">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</div>
+     
+  <div style=" width:600px; height:50px; float:left; margin-top:13px;">
+   
+    <form class="form-inline">
+      <div data-toggle="distpicker">
+        <div class="form-group" style="width:100px; float:left;">
+          <label class="sr-only" for="province1"></label>
+          <select class="form-control" id="city_id"   name="province_id" style="height: 25px;line-height: 25px;border: solid 1px #999; border-radius: 5px;">
+		  
+        
+          </select>
+        </div>
+        <div class="form-group" style="width:100px; float:left;">
+          <label class="sr-only" for="city1"></label>
+          <select class="form-control" id="area_id"  name="city_id" style="height: 25px; line-height: 25px; border: solid 1px #999; border-radius: 5px;"><option value="" data-code="">—— 市 ——</option>
+		  
+		  </select>
+        </div>
+        <div class="form-group" style="width:100px; float:left;">
+          <label class="sr-only" for="district1"></label>
+          <select class="form-control" id="business_id"   name="town_id" style="height: 25px; line-height: 25px; border: solid 1px #999; border-radius: 5px;">
+		  <option value="" data-code="">—— 区 ——</option>
+		  
+		  </select>
+
+        </div>
+      </div>
+    </form>
+		</div>
+       </li>
+      <li>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：<input class="xxinput" type="text"  name="nickname" value="<{$LAWYER.nickname}>"/>&nbsp;&nbsp;默认为"匿名"，如：陈先生、张女士。</li>
+<!--      <li>电子邮箱：<input class="xxinput" />&nbsp;&nbsp;务必填写真实，找回密码的唯一凭证。</li>
+-->    <!--  <li>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<label><input type="radio" checked="checked" value="1" name="sex" />男</label>&nbsp;&nbsp;<label><input type="radio"  value="1" name="sex" />女</label></li>-->
+      <li>Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q：<input class="xxinput"    type="text"  name="qq" value="<{$LAWYER.qq}>"/></li>
+      <li>手机号码：<input class="xxinput"   type="text"    name="mobile" value="<{$LAWYER.mobile}>"/></li>
+      <li style="width:500px; height:140px;">职业感言：<input class="xxinput" type="text"     name="intro" value="<{$LAWYER.intro}>" style="width:400px; height:120px; line-height:30px;" /></li>
+      <li>执业证号：<input class="xxinput"  type="text"    name="professnumber" value="<{$LAWYER.professnumber}>" /></li>
+      <li>电子邮箱：<input class="xxinput"  type="text"    name="email" value="<{$LAWYER.email}>" /></li>
+      <li style="width:500px; height:80px;">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长：<input class="xxinput" type="text"   name="intro" value="<{$LAWYER.tags}>" style="width:400px; height:60px; line-height:30px;" /></li>
+      <li style="width:500px; height:140px;">简&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介：<input class="xxinput" type="text"    name="details" value="<{$LAWYER.details}>" style="width:400px; height:120px; line-height:30px;" /></li>
+
+
+      <li><input type="button"  value="保 存" class="bc"/></li>
+      </ul>
+      </div>
+      <div class="xx_right_3_right">
+        <a href=""><img src="__TMPL__statics/images/0ef77d7cbcd26ef1.jpg" /></a><span><a href="">点击更换头像</a></span>
+      </div>
+      
+    </div>
+    <!--right-->
+    
+  </div>
+</div>
+<!--center-->
+
+
+
+
+<include  file='member:footer'/>    
