@@ -12,16 +12,11 @@ class CommonAction extends Action
 {
 
 	protected $uid = 0;
-
+	protected $utype = 1;
 	protected $member = array();
-	protected $doctor = array();
-	protected $hospitalcenter = array();
-
+	protected $lawyer = array();
 	protected $_CONFIG = array();
-
 	protected $seodatas = array();
-
-	protected $Hospitalcates = array();
     protected $Itemcates = array();
    protected $template_setting = array();
 
@@ -50,10 +45,14 @@ class CommonAction extends Action
 
 		$this->uid = getuid();
 
-		if (!empty($this->uid)) {
+		if (!empty($this->uid)&&($this->$utype==1)) {
 
 			$this->member = d('Users')->find($this->uid);
 
+		}else{
+			
+			$this->lawyer = d('Lawyer')->find($this->uid);
+			
 		}
 
 		$this->assign('ctl', strtolower(MODULE_NAME));
@@ -69,6 +68,7 @@ class CommonAction extends Action
 		$this->assign('CONFIG', $this->_CONFIG);
 
 		$this->assign('MEMBER', $this->member);
+		$this->assign('LAWYER', $this->lawyer);
 		
 		$this->assign('today', TODAY);
 
