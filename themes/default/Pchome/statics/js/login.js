@@ -37,7 +37,7 @@ function login(){
 				reloadLogincode();
 				$("#msgLoginJavaCode").html("");
 				
-			}else if(arr=='3'){							location.href="/index.php?m=lawcenter&a=index";								}else if(arr=='5'){																alert("您的密码输入有误");							}else{												alert("该用户不存在");											}
+			}else if(arr=='3'){							location.href="/index.php?m=lawyercenter&a=index";								}else if(arr=='5'){																alert("您的密码输入有误");							}else{												alert("该用户不存在");											}
 		}            
 	});
 	
