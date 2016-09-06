@@ -169,7 +169,7 @@
 
 								<td>
 
-									<input  type="text" class="form-control" style="width:80px;display: inline;" placeholder="验证码" maxlength="4" onblur="checkLoginJavaCode()" id="loginJavaCode"/>
+									<input  type="text"   name="yzm" class="form-control" style="width:80px;display: inline;" placeholder="验证码" maxlength="4" onblur="checkLoginJavaCode()" id="loginJavaCode"/>
 
 									<span style="padding-left:10px"><img src="__ROOT__/index.php?g=app&m=verify&a=index&mt=<{:time()}>" id="imgLoginJavaCode" onclick="reloadLogincode()" style="cursor: pointer;" title="看不清楚,换一张"></span>
 
@@ -428,11 +428,5 @@
   <!--foot-->
 <br/>
  <script> var BAO_PUBLIC = '__PUBLIC__'; var BAO_ROOT = '__ROOT__';</script>
-<script>
-  var
- $(document).on('click', '.yzm_code', function () {
-        $("#" + $(this).attr('rel')).attr('src', BAO_ROOT + '/index.php?g=app&m=verify&a=index&mt=' + Math.random());
-    });
-	
-</script>	
+
 <include file="public:footer"/> 
