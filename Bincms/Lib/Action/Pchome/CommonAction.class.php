@@ -12,7 +12,7 @@ class CommonAction extends Action
 {
 
 	protected $uid = 0;
-	protected $utype = 1;
+	protected $utype = 0;
 	protected $member = array();
 	protected $lawyer = array();
 	protected $_CONFIG = array();
