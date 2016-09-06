@@ -15,7 +15,7 @@ function login(){
 	}
 	if(checkPassword()==false){
 		return;
-	}
+	}	$(function(){     var uty=$("input[name='utype']:checked").val(); 	if(!uty){				alert("请选择会员的身份");					}else{				return  true;					}		})					
 	if(errorCount>=2){
 		$("#loginyzm").css("display","block");
 		if(checkLoginJavaCode()==false ||loginJavaCodeIsok==false){
@@ -28,16 +28,16 @@ function login(){
 		data:$("#loginForm").serialize(),
 		dataType:"json",
 		success:function(arr){ 
-			if(arr=="1"){             alert(arr);
-				location.href="/index.php?m=member&a=index";
+			if(arr=="1"){            alert(arr);
+			location.href="/index.php?m=member&a=index";
 			}else if(arr=='2'){
-				alert("用户名或密码输入不正确");
+				
 				errorCount++;
 				$("#password").val("");
 				reloadLogincode();
 				$("#msgLoginJavaCode").html("");
 				
-			}
+			}else if(arr=='3'){							location.href="/index.php?m=lawcenter&a=index";								}else if(arr=='5'){																alert("您的密码输入有误");							}else{												alert("该用户不存在");											}
 		}            
 	});
 	
