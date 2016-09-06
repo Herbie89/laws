@@ -23,6 +23,8 @@ class  DatasAction extends  CommonAction{
         $data = array();
         $data['city']       = D('Chinaarea')->where(array('region_type'=>1))->select();
         $data['area']       = D('Chinaarea')->where(array('region_type'=>2))->select();
+        $data['town']       = D('Chinaarea')->where(array('region_type'=>3))->select();
+        
         header("Content-Type:application/javascript");
         echo   'var  cityareas = '.  json_encode($data);die;
     }
