@@ -1,4 +1,4 @@
-
+<include file="public:header1" /> <!-- -头部声明文件-- -->
 <include file="public:topTwo" /> <!-- -头部声明文件-- -->
 <include file="public:navTwo" /> <!-- -头部声明文件-- -->
 <div id="sysmsg">
@@ -149,13 +149,13 @@
 							
 							<tr>
 
-								<td width="150" align="right">身份：</td>
+								<td width="150" align="right">选择身份：</td>
 
 								<td>
 
-									会员：<input type="radio" class="form-control" name="utype" style="display: inline;" />
-                                    律师：  <input type="radio" class="form-control" name="utype" style="display: inline;" />
-									<span id="msgLoginNameError" style="color: red"></span>
+									&nbsp;&nbsp;会员&nbsp;&nbsp;<input type="radio"  name="utype"  value="1" /><span  style="margin-left:10px;"></span>
+                                   &nbsp;&nbsp; 律师&nbsp;&nbsp;<input type="radio"  name="utype"    value="2" />
+									<span id="msgLoginNameErrors" style="color: red"></span>
 
 								</td>
 
@@ -260,7 +260,7 @@
 
 											<input type="text" class="form-control" placeholder="请输入您的账号" 
 
-												id="regPhone" name="phone" maxlength="11" style="width:215px;"/>
+												id="regPhone" name="account" maxlength="11" style="width:215px;"/>
 
 											<span id="msgRegPhone" style="color: red"></span>
 
@@ -276,7 +276,7 @@
 
 											<input type="text" class="form-control" placeholder="请输入您的电话" 
 
-												 id="regPhone" name="phone" maxlength="11" style="width:215px;"/>
+												 id="regPhone" name="tel" maxlength="11" style="width:215px;"/>
 
 											<span id="msgRegPhone" style="color: red">请输入你的电话</span>
 
@@ -408,7 +408,7 @@
 
 										<td width="90" align="right">确认密码：</td>
 
-										<td><input type="password" class="form-control" placeholder="与密码相同" maxlength="16"
+										<td><input type="password" class="form-control" placeholder="与密码相同" maxlength="16"  name="repassword"
 
 												onblur="checkCommonRegRepwd()" id="commonRegRepwd" autocomplete="off"/>
 
