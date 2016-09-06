@@ -702,12 +702,37 @@ class LawyerAction extends CommonAction {
         $this->display();
     }
 
-    public function index() {
-        import('ORG.Util.Page'); // 导入分页类
-        $ele = D('Ele');
+    public function index(){
+        $lawyer=D("Lawyer");
+        $curpage=empty($_GET['page'])?1:$_GET['page'];
+        $id=@$_GET['id'];
+        if($id=='') {
+            $lawyerall = $lawyer->select();
+            $lawyercount=count($lawyerall);
+            $pagesize=6;
+            $pagecount=ceil($lawyercount/$pagesize);
+            $lawyerpage=$lawyer->limit(($curpage-1)*$pagesize,$pagesize)->select();
+            $this->assign("curpage",$curpage);
+            $this->assign("pagecount",$pagecount);
+            $this->assign("lawyerpage",$lawyerpage);
+
+        }
+        if($id!=""){
+            $lawyerall = $lawyer->select();
+            $lawyercount=count($lawyerall);
+            $pagesize=6;
+            $pagecount=ceil($lawyercount/$pagesize);
+            $lawyerpage=$lawyer->limit(($curpage-1)*$pagesize,$pagesize)->select();
+            $this->assign("curpage",$curpage);
+            $this->assign("pagecount",$pagecount);
+            $this->assign("lawyerpage",$lawyerpage);
+        }
+
+       /* import('ORG.Util.Page'); // 导入分页类
+        $ele = D('Lawyer');
         $map = array('city_id' => $this->city_id);
         $linkArr = array();
-        if ($keyword = $this->_param('keyword', 'htmlspecialchars')) {
+        if ($keyword = $this->_param('keyword', 'htmlspecialchars')){
             $map['shop_name'] = array('LIKE', '%' . $keyword . '%');
             $this->assign('keyword', $keyword);
             $linkArr['keywrod'] = $map['shop_name'];
@@ -720,7 +745,7 @@ class LawyerAction extends CommonAction {
         $linkArr['lat'] = $lat;
         $this->assign('cate', $cate);
         $price = (int) $this->_param('price');
-        switch ($price) {
+        switch ($price){
             case 1:
                 $map['since_money'] = array('ELT', '5000');
                 break;
@@ -802,7 +827,7 @@ class LawyerAction extends CommonAction {
        // $this->assign('shops', D('Shop')->itemsByIds($shop_ids));
         $this->assign('list', $list); // 赋值数据集
         $this->assign('page', $show); // 赋值分页输出
-        $this->assign('linkArr', $linkArr);
+        $this->assign('linkArr', $linkArr);*/
         $this->display();
     }
 
