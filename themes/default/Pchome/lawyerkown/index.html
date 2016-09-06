@@ -338,65 +338,16 @@
                 <div class="l-sn">
 
                     <div class="pl15 pr15" style="height: 460px">
-
+<foreach name="hyjtarr" item="var">
                         <dl>
-                            <dt> <a target="_blank" href="/laws/hunyinjiating/jiehun/" title="结婚"><b class="s-be">结婚</b></a></dt>
+                            <dt> <a target="_blank" href="/laws/hunyinjiating/jiehun/" title="结婚"><b class="s-be"><{$var.cate_name}></b></a></dt>
                             <dd>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚条件">结婚条件</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚程序">结婚程序</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚登记">结婚登记</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚证">结婚证</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:85px" title="婚前婚后协议">婚前婚后协议</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="复婚再婚">复婚再婚</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚彩礼">结婚彩礼</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="同居">同居</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="扶养">扶养</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="婚姻自由">婚姻自由</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="计划生育">计划生育</a>
-                                <a target="_blank" href="法律知识左侧下面小分类.html" style="width:85px" title="婚姻登记条例">婚姻登记条例</a>
+                                    <foreach name="var.chiled" item="varvar">
+                                    <a target="_blank" href="法律知识左侧下面小分类.html" style="width:55px" title="结婚条件"><{$varvar.cate_name}></a>
+                                    </foreach>
                             </dd>
                         </dl>
-
-                        <dl>
-                            <dt> <a target="_blank" href="/laws/hunyinjiating/lihun/" title="离婚"><b class="s-be">离婚</b></a></dt>
-
-                            <dd>
-
-                                <a target="_blank" href="/laws/hunyinjiating/lihun/lihuntiaojian/" style="width:55px" title="离婚条件">离婚条件</a><a target="_blank" href="/laws/hunyinjiating/lihun/lihunchengxu/" style="width:55px" title="离婚程序">离婚程序</a><a target="_blank" href="/laws/hunyinjiating/lihun/xylh/" style="width:55px" title="协议离婚">协议离婚</a><a target="_blank" href="/laws/hunyinjiating/lihun/lhxys/" style="width:85px" title="离婚协议书">离婚协议书</a><a target="_blank" href="/laws/hunyinjiating/lihun/lihunzheng/" style="width:55px" title="离婚证">离婚证</a><a target="_blank" href="/laws/hunyinjiating/lihun/lihunsusong/" style="width:55px" title="诉讼离婚">诉讼离婚</a><a target="_blank" href="/laws/hunyinjiating/lihun/lhqss/" style="width:85px" title="离婚起诉书">离婚起诉书</a><a target="_blank" href="/laws/hunyinjiating/lihun/lihundiaojieshu/" style="width:55px" title="离婚调解">离婚调解</a><a target="_blank" href="/laws/hunyinjiating/lihun/lhqz/" style="width:55px" title="离婚证据">离婚证据</a><a target="_blank" href="/laws/hunyinjiating/lihun/lihunanli/" style="width:55px" title="离婚案例">离婚案例</a><a target="_blank" href="/laws/hunyinjiating/lihun/lhpc/" style="width:55px" title="离婚赔偿">离婚赔偿</a> </dd>
-
-                        </dl>
-
-                        <dl>
-
-                            <dt> <a target="_blank" href="/laws/hunyinjiating/zinvfuyang/" title="子女抚养"><b class="s-be">子女抚养</b></a></dt>
-
-                            <dd>
-
-                                <a target="_blank" href="/laws/hunyinjiating/zinvfuyang/fuyangquan/" style="width:55px" title="抚养权">抚养权</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/znfy/" style="width:55px" title="抚养费">抚养费</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/jianhuquan/" style="width:55px" title="监护权">监护权</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/tanshiquan/" style="width:55px" title="探视权">探视权</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/shfyf/" style="width:85px" title="社会抚养费">社会抚养费</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/qinzijianding/" style="width:55px" title="亲子鉴定">亲子鉴定</a><a target="_blank" href="/laws/hunyinjiating/zinvfuyang/jhqbg/" style="width:85px" title="监护权变更">监护权变更</a> </dd>
-
-                        </dl>
-
-                        <dl>
-
-                            <dt> <a target="_blank" href="/laws/hunyinjiating/ccfg/" title="夫妻财产"><b class="s-be">夫妻财产</b></a></dt>
-
-                            <dd>
-
-                                <a target="_blank" href="/laws/hunyinjiating/ccfg/hqcc/" style="width:55px" title="婚前财产">婚前财产</a><a target="_blank" href="/laws/hunyinjiating/ccfg/fqgrcc/" style="width:85px" title="婚后个人财产">婚后个人财产</a><a target="_blank" href="/laws/hunyinjiating/ccfg/gongtongcaichan/" style="width:85px" title="婚后共同财产">婚后共同财产</a><a target="_blank" href="/laws/hunyinjiating/ccfg/lihunzhaiwu/" style="width:55px" title="夫妻债务">夫妻债务</a><a target="_blank" href="/laws/hunyinjiating/ccfg/lhccfg/" style="width:85px" title="离婚财产分割">离婚财产分割</a><a target="_blank" href="/laws/hunyinjiating/ccfg/cqxy/" style="width:85px" title="夫妻财产协议">夫妻财产协议</a><a target="_blank" href="/laws/hunyinjiating/ccfg/fqccgz/" style="width:85px" title="夫妻财产公证">夫妻财产公证</a> </dd>
-
-                        </dl>
-
-                        <dl>
-
-                            <dt> <a target="_blank" href="/laws/hunyinjiating/hunyinjiatingjtbl/" title="家庭暴力"><b class="s-be">家庭暴力</b></a></dt>
-
-                            <dd>
-
-                                <a target="_blank" href="/laws/hunyinjiating/hunyinjiatingjtbl/jtblcs/" style="width:85px" title="家庭暴力常识">家庭暴力常识</a><a target="_blank" href="/laws/hunyinjiating/hunyinjiatingjtbl/jtlbl/" style="width:85px" title="家庭冷暴力">家庭冷暴力</a><a target="_blank" href="/laws/hunyinjiating/hunyinjiatingjtbl/jtblfg/" style="width:85px" title="家庭暴力法规">家庭暴力法规</a><a target="_blank" href="/laws/hunyinjiating/hunyinjiatingjtbl/jtblal/" style="width:85px" title="家庭暴力案例">家庭暴力案例</a> </dd>
-
-                        </dl>
-
-
+</foreach>
 
                     </div>
 
