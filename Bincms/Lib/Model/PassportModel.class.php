@@ -168,6 +168,11 @@ class PassportModel {
             	$user = D('Users')->getUserByMobile($account);
 			} else {
 				$user = D('Users')->getUserByAccount($account);
+			
+			
+			
+			
+			
 			}
             if (empty($user)) {
                 $this->error = '账号或密码不正确';
