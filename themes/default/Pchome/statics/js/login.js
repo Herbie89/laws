@@ -28,7 +28,7 @@ function login(){
 		data:$("#loginForm").serialize(),
 		dataType:"json",
 		success:function(arr){ 
-			if(arr=="1"){            alert(arr);
+			if(arr=="1"){            //alert(arr);
 			location.href="/index.php?m=member&a=index";
 			}else if(arr=='2'){
 				
